@@ -21,14 +21,14 @@ def fff(request):
 
     
     messages = [
-        {"role": "system", "content": 'you are a helpful assistant. 넌 사랑에 대해 잘 알려주는 ai야. '}
+        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측하는 ai야. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. '}
     ]
 
 
 
 
     # 대화에 사용자 메시지 추가
-    messages.append({"role": "user", "content": "사랑이란 뭐라고 생각해? 10자 이내로 대답해."})
+    messages.append({"role": "user", "content": "과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측해. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. 10자리의 숫자를 출력한 이후에는 출력에 대한 근거를 한글로 말해. 답변은 30자 이내여야 해."})
 
     # OpenAI API 호출
     response = client.chat.completions.create(
