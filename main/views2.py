@@ -37,7 +37,29 @@ def fff(request):
     )
     bot_response = response.choices[0].message.content
 
-            
+
+    
+
+
+
+    messages2 = [
+        {"role": "system", "content": 'you are a helpful assistant. 넌 사랑 전문가야. '}
+    ]
+
+
+
+
+    # 대화에 사용자 메시지 추가
+    messages2.append({"role": "user", "content": "사랑이란 뭐라고 생각해? 답변은 10자 이내여야 해."})
+
+    # OpenAI API 호출
+    response2 = client.chat.completions.create(
+        model="gpt-4.1-nano",  # 모델 이름 수정
+        messages=messages2
+    )
+    bot_response2 = response2.choices[0].message.content
+
+                        
             
             
             
@@ -57,6 +79,7 @@ def fff(request):
         'title': title,
         'q': q,
         'bot_response': bot_response,
+        'bot_response2': bot_response2,
         'a' : 8
         # 'map': fig
         # , ax
