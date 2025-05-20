@@ -2,31 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>GPT의 로또 추천</title>
+    <style>
+      .lotto-wrapper {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+        padding: 50px 20px;
+        margin: 30px 0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      .lotto-wrapper h1 {
+        font-size: 28px;
+        color: #222;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .header-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .header-row img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .header-row h2 {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+      }
+
+      .lotto-container {
+        display: flex;
+        gap: 15px;
+        margin-left: 20px;
+      }
+
+      .ball {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .yellow { background-color: #fbc02d; }
+      .blue   { background-color: #039be5; }
+      .red    { background-color: #e53935; }
+      .gray   { background-color: #757575; }
+      .green  { background-color: #43a047; }
+    </style>
 </head>
 <body>
 <p>성은님 작업공간</p>
-<!-- <p>배경, 제목, 전체적인 디자인 틀</p> -->
 
 <br><br><br><br><br>
 <p>=========================================================</p>
 
 <p>고홍규 작업공간</p>
-    <p>테스트: AI, 사랑이란 뭐라고 생각해?</p>
-    <p>AI: {{bot_response2}}<br></p>
+<p>테스트: AI, 사랑이란 뭐라고 생각해?</p>
+<p>AI: {{bot_response2}}<br></p>
 
-    <p>로또추천AI: {{bot_response}}<br></p>
+<p>로또추천AI: {{bot_response}}<br></p>
 <p>=========================================================</p>
+
 <p>준엽님 작업공간</p>
-<!-- <p>번호 추천 디자인</p> -->
+<div class="lotto-wrapper">
+  <h1 id="round-title">0000회차의 예상 로또 번호</h1>
+  <div class="header-row">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="GPT 로고">
+    <h2>GPT의 로또 추천</h2>
+    <div class="lotto-container">
+      <div class="ball yellow"></div>
+      <div class="ball blue"></div>
+      <div class="ball red"></div>
+      <div class="ball gray"></div>
+      <div class="ball green"></div>
+      <div class="ball yellow"></div>
+    </div>
+  </div>
+</div>
 
 <br><br><br><br><br>
 <p>=========================================================</p>
 <p>승열님 작업공간</p>
-<!-- <p>과거 로또 당첨 번호, 상금 불러오기 (10회차 정도도)</p> -->
 
 <br><br><br><br><br>
 <p>=========================================================</p>
 
+<script>
+  function calculateRound() {
+    const baseRound = 1172;
+    const baseDate = new Date("2025-05-17T20:30:00");
+    const now = new Date();
+
+    const diffMs = now - baseDate;
+    const weekMs = 7 * 24 * 60 * 60 * 1000;
+    const fullWeeksPassed = Math.floor(diffMs / weekMs);
+
+    const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
+
+    const round = baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
+    return round;
+  }
+
+  const round = calculateRound();
+  document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
+</script>
 </body>
 </html>
+
