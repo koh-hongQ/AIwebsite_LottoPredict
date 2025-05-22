@@ -21,14 +21,14 @@ def fff(request):
 
     
     messages = [
-        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측하는 ai야. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. '}
+        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6자리의 로또 번호를 예측하는 ai야. 답변은 6자리의 숫자 말고 절대 다른 출력이 있으면 안돼. '}
     ]
 
 
 
 
     # 대화에 사용자 메시지 추가
-    messages.append({"role": "user", "content": "과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측해. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. 10자리의 숫자는 1234567890 이런 거 안돼. 10자리의 숫자를 출력한 이후에는 출력에 대한 근거를 한글로 말해. 답변은 30자 이내여야 해."})
+    messages.append({"role": "user", "content": "과거 로또 데이터를 기반으로 6자리의 로또 번호를 예측해. 답변은 6자리의 숫자 말고 절대 다른 출력이 있으면 안돼. 6자리의 숫자는 1234567890 이런 거 안돼. "})
 
     # OpenAI API 호출
     response = client.chat.completions.create(
@@ -43,14 +43,14 @@ def fff(request):
 
 
     messages2 = [
-        {"role": "system", "content": 'you are a helpful assistant. 넌 사랑 전문가야. '}
+        {"role": "system", "content": 'you are a helpful assistant. 넌 절대 숫자를 출력하지 않아. 아까 출력한 숫자에 대한 근거를 알려주는 ai임. '}
     ]
 
 
 
 
     # 대화에 사용자 메시지 추가
-    messages2.append({"role": "user", "content": "사랑이란 뭐라고 생각해? 답변은 10자 이내여야 해."})
+    messages2.append({"role": "user", "content": "방금 출력한 6자리 로또 출력에 대한 근거만 한글로 말해. 답변은 50자 이내여야 해."})
 
     # OpenAI API 호출
     response2 = client.chat.completions.create(
