@@ -23,10 +23,19 @@ UI가 깔끔하고 참고해도 좋을 것 같습니다. <br>
 
 ========
 
+유승열 조사 내용 : <br>
+관련 website<br>
+https://tykimos.github.io/2020/01/25/keras_lstm_lotto_v895/<br>
+https://github.com/youtube-jocoding/lotto-deeplearning?tab=readme-ov-file<br>
+https://animalface.site/lotto<br>
+<br>
+========
+
 김성은 조사내용
 
 링크: https://philarchive.org/archive/ALGPAO
 Kaggle에서 수집한 과거 로또 데이터를 활용하여 딥러닝 및 시계열 분석 기법을 통해 로또 번호를 예측하는 모델을 개발하였다. 연구 결과는 AI가 로또 예측에 일정한 가능성을 보이지만 무작위성의 한계를 극복하지 못했다는 것을 강조한다.
 링크: https://patents.google.com/patent/KR102306385B1/ko
 이 특허는 과거 회차별 당첨번호를 포함하여 grouping한 후 인공지능을 학습시켜 각 케이스 별로 복수개의 로또 복권 번호를 조함하여 추출한 후 당첨 번호와 비교하여 높은 당첨 확률을 갖는 케이스를 선별한다.
+
 
