@@ -26,9 +26,10 @@ UI가 깔끔하고 참고해도 좋을 것 같습니다. <br>
 유승열 조사 내용 : <br>
 관련 website<br>
 https://tykimos.github.io/2020/01/25/keras_lstm_lotto_v895/<br>
-https://github.com/youtube-jocoding/lotto-deeplearning?tab=readme-ov-file<br>
-https://animalface.site/lotto<br>
+https://github.com/youtube-jocoding/lotto-deeplearning?tab=readme-ov-file <br>
+https://animalface.site/lotto <br>
 <br>
+
 ========
 
 김성은 조사내용
