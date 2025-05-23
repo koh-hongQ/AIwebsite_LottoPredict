@@ -1,3 +1,5 @@
+김준엽 조사 내용 :
+
 (https://tykimos.github.io/2020/01/25/keras_lstm_lotto_v895/)
 python deep learnning을 이용한 로또 당첨 프로그램으로
 로또가 독립시행(매 시행마다 특정 결과가 나올 확률이 변하지 않는 것)이 아니다라는 가설을 시작으로
@@ -12,3 +14,11 @@ https://www.youtube.com/watch?v=3G3zExNItj0&t=1379s
 (youtube: 조코딩/ title:딥러닝이 예측한 로또 번호는 당첨이 잘될까?)
 위 유튜브 영상은 유튜버가 (https://tykimos.github.io/2020/01/25/keras_lstm_lotto_v895/) 위 사이트의 내용을 바탕으로 코딩을하여 만든 로또 예측 프로그램에 대한 영상입니다.
  
+=======
+
+고홍규 조사 내용 : <br>
+관련 웹사이트 : https://ai-lottosolutions.com/ <br>
+관련 오픈소스 : https://github.com/kimwooseob-pixel/lottosolutions <br>
+UI가 깔끔하고 참고해도 좋을 것 같습니다. <br>
+
+========
