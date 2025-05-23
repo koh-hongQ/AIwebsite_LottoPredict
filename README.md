@@ -10,3 +10,24 @@ https://issac1102.pythonanywhere.com/
 <br>김준엽 / 수학과 / 2학년
 <br>유승열 / 정보통신학과 / 3학년
 
+# Short-description of Project features
+• Components (Technologies and Tools) :
+-Frontend: HTML, CSS, Javascript
+-Backend: Django Framework
+-Deployment: pythonanywhere
+-Version Control: GitHub
+
+• Specs :
+
+- User → sends request
+- Server → processes AI prediction
+- Frontend → visualizes and displays the result
+
+• Functional Requirements :
+Functional Requirements:
+“The user can click to request a prediction.”
+“The server calls the AI model to generate 6 numbers.”
+
+Non-Functional Requirements (e.g., speed, security, accessibility):
+“The system should respond within 3 seconds.”
+“The website should be optimized for both mobile and desktop.”
