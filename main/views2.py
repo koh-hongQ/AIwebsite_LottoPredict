@@ -19,25 +19,35 @@ def fff(request):
     client = OpenAI(api_key=api_key)  #여기에 본인의 OpenAI API를 입력하시면 됩니다.
 
     lottodata= " 7,9,24,40,42,44 / 3,6,7,11,12,17 / 3,13,28,34,38,42 / 5,12,24,26,39,42 / 9,21,24,30,33,37 / 8,23,31,35,39,40 / 14,23,25,27,29,42 / 6,7,27,29,38,45 / 17,18,23,25,38,39 / 2,13,15,16,33,43 "
-    messages = [
-        ("system", 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6개의 로또 번호를 예측하는 ai야. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45사이의 수야.'),
+    # messages = [
+    #     ("system", 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6개의 로또 번호를 예측하는 ai야. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45사이의 수야.'),
 
 
-        ("human",  "{lottodata}를 기반으로 6개의 로또 번호를 예측해. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45 사이의 수야. 3,13,28,34,38,42 이런 예시처럼 출력하되 숫자마다 콤마로 구분해."),
-        ]
-    prompt_template = ChatPromptTemplate.from_messages(messages)
-    prompt = prompt_template.invoke({"lottodata": lottodata})
-    #디폴트로 model변수의 AI 모델을 쓰는거임?
+    #     ("human",  "{lottodata}를 기반으로 6개의 로또 번호를 예측해. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45 사이의 수야. 3,13,28,34,38,42 이런 예시처럼 출력하되 숫자마다 콤마로 구분해."),
+    #     ]
+    # prompt_template = ChatPromptTemplate.from_messages(messages)
+    # prompt = prompt_template.invoke({"lottodata": lottodata})
+    # #디폴트로 model변수의 AI 모델을 쓰는거임?
     
-    # llm.invoke(prompt) 
+    # # llm.invoke(prompt) 
 
-    # OpenAI API 호출
+    # # OpenAI API 호출
+    # response = client.chat.completions.create(
+    #     model="gpt-4.1-nano",  # 모델 이름 수정
+    #     messages=prompt
+    # )
+    # bot_response = response.choices[0].message.content
+    messages = [
+        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6개의 로또 번호를 예측하는 ai야. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45사이의 수야.'},
+        {"role": "user", "content": f"{lottodata}를 기반으로 6개의 로또 번호를 예측해. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45 사이의 수야. 3,13,28,34,38,42 이런 예시처럼 출력하되 숫자마다 콤마로 구분해."}
+    ]
+
     response = client.chat.completions.create(
-        model="gpt-4.1-nano",  # 모델 이름 수정
-        messages=prompt
+        model="gpt-4.1-nano",
+        messages=messages
     )
     bot_response = response.choices[0].message.content
-
+        
 # ====================================
     
 
@@ -66,14 +76,14 @@ def fff(request):
 
 
     messages3 = [
-        {"role": "system", "content": 'you are a helpful assistant. Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 50 characters.'}
+        {"role": "system", "content": 'you are a helpful assistant. Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 300 characters.'}
     ]
 
 
 
 
     # 대화에 사용자 메시지 추가
-    messages3.append({"role": "user", "content" : "Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 50 characters."})
+    messages3.append({"role": "user", "content" : "Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 300 characters."})
 
     # OpenAI API 호출
     response3 = client.chat.completions.create(
