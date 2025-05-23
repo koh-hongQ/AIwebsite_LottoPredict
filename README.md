@@ -28,6 +28,6 @@ Functional Requirements:
 “The user can click to request a prediction.”
 “The server calls the AI model to generate 6 numbers.”
 
-Non-Functional Requirements (e.g., speed, security, accessibility):
+• Non-Functional Requirements (e.g., speed, security, accessibility):
 “The system should respond within 3 seconds.”
 “The website should be optimized for both mobile and desktop.”
