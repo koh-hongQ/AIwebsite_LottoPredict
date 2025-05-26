@@ -121,7 +121,25 @@
 
 <body>
 <!-- <p>성은님 작업공간</p> -->
+  <h1 id = "welcome"></h1>
+  <button onclick="logout()">LOGOUT</button>
 
+	<script>
+		const user = sessionStorge.getItem('loggedInUser');
+		const welcomeText = document.getElementById('welcome');
+		
+		if(user){
+			welcomeText.innerText = 'Success LogIn';
+		}else{
+			alert('No Information');
+			window.location.href = 'loginScreen.html';
+		}
+
+		function logout(){
+			sessionStorage.removeItem('loggedInUser');
+			window.location.href = 'loginScreen.html';
+		}
+	</script>
 <!-- <p>배경, 제목, 전체적인 디자인 틀</p> -->
 <img src="https://blog.kakaocdn.net/dn/mWAxU/btqDpfejsMm/Ysp2b30tARwjbatmFm3kWK/img.jpg" class="title-image">
 
