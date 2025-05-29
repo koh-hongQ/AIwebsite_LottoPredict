@@ -112,8 +112,22 @@
     .c5 { background-color: #43aa8b; }
     .c6 { background-color: #577590; }
     .c7 { background-color: #277da1; }
-
- 
+    @media (max-width: 600px) {
+  .lotto-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ball {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .title-image {
+    width: 100%;
+    height: auto;
+  }
+} 
     </style>
 </head>
 
@@ -152,6 +166,49 @@
     </div>
   </div>
 </div>
+
+  <script>
+    function calculateRound() {
+      const baseRound = 1172;
+      const baseDate = new Date("2025-05-17T20:30:00");
+      const now = new Date();
+
+      const diffMs = now - baseDate;
+      const weekMs = 7 * 24 * 60 * 60 * 1000;
+      const fullWeeksPassed = Math.floor(diffMs / weekMs);
+
+      const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
+
+      return baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
+    }
+
+    function insertLottoNumbers() {
+      // 서버 혹은 템플릿 엔진에서 {{로또번호}} 부분이 실제 숫자로 치환되어야 합니다.
+      // 예시: "3,12,25,33,41,45"
+      const lottoData = "{{로또번호}}";
+      const numbers = lottoData.split(',').map(n => n.trim());
+      const balls = document.querySelectorAll('.lotto-container .ball');
+
+      for (let i = 0; i < balls.length && i < numbers.length; i++) {
+        balls[i].textContent = numbers[i];
+
+        const num = parseInt(numbers[i]);
+        balls[i].className = 'ball'; // 초기화
+
+        if (num <= 10) balls[i].classList.add('yellow');
+        else if (num <= 20) balls[i].classList.add('blue');
+        else if (num <= 30) balls[i].classList.add('red');
+        else if (num <= 40) balls[i].classList.add('gray');
+        else balls[i].classList.add('green');
+      }
+    }
+
+    window.onload = function () {
+      const round = calculateRound();
+      document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
+      insertLottoNumbers();
+    };
+  </script>
 
 <br><br><br><br><br>
 <!-- <p>=========================================================</p> -->
