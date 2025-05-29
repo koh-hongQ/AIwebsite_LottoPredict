@@ -3,6 +3,7 @@ from openai import OpenAI
 import os
 import requests
 from dotenv import load_dotenv
+from langchain.prompts import ChatPromptTemplate
 
 def fff(request):
     # 파이썬에서 계산한 값이나 데이터
@@ -17,40 +18,50 @@ def fff(request):
     # Store your OpenAI API key in an environment variable or secure file
     client = OpenAI(api_key=api_key)  #여기에 본인의 OpenAI API를 입력하시면 됩니다.
 
+    lottodata= " 7,9,24,40,42,44 / 3,6,7,11,12,17 / 3,13,28,34,38,42 / 5,12,24,26,39,42 / 9,21,24,30,33,37 / 8,23,31,35,39,40 / 14,23,25,27,29,42 / 6,7,27,29,38,45 / 17,18,23,25,38,39 / 2,13,15,16,33,43 "
+    # messages = [
+    #     ("system", 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6개의 로또 번호를 예측하는 ai야. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45사이의 수야.'),
 
 
+    #     ("human",  "{lottodata}를 기반으로 6개의 로또 번호를 예측해. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45 사이의 수야. 3,13,28,34,38,42 이런 예시처럼 출력하되 숫자마다 콤마로 구분해."),
+    #     ]
+    # prompt_template = ChatPromptTemplate.from_messages(messages)
+    # prompt = prompt_template.invoke({"lottodata": lottodata})
+    # #디폴트로 model변수의 AI 모델을 쓰는거임?
     
+    # # llm.invoke(prompt) 
+
+    # # OpenAI API 호출
+    # response = client.chat.completions.create(
+    #     model="gpt-4.1-nano",  # 모델 이름 수정
+    #     messages=prompt
+    # )
+    # bot_response = response.choices[0].message.content
     messages = [
-        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측하는 ai야. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. '}
+        {"role": "system", "content": 'you are a helpful assistant. 넌 과거 로또 데이터를 기반으로 6개의 로또 번호를 예측하는 ai야. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45사이의 수야.'},
+        {"role": "user", "content": f"{lottodata}를 기반으로 6개의 로또 번호를 예측해. 답변은 6개의 숫자 말고 절대 다른 출력이 있으면 안돼. 각 숫자는 1에서 45 사이의 수야. 3,13,28,34,38,42 이런 예시처럼 출력하되 숫자마다 콤마로 구분해."}
     ]
 
-
-
-
-    # 대화에 사용자 메시지 추가
-    messages.append({"role": "user", "content": "과거 로또 데이터를 기반으로 10자리의 로또 번호를 예측해. 답변은 10자리의 숫자 말고 절대 다른 출력이 있으면 안돼. 10자리의 숫자는 1234567890 이런 거 안돼. 10자리의 숫자를 출력한 이후에는 출력에 대한 근거를 한글로 말해. 답변은 30자 이내여야 해."})
-
-    # OpenAI API 호출
     response = client.chat.completions.create(
-        model="gpt-4.1-nano",  # 모델 이름 수정
+        model="gpt-4.1-nano",
         messages=messages
     )
     bot_response = response.choices[0].message.content
-
-
+        
+# ====================================
     
 
 
 
     messages2 = [
-        {"role": "system", "content": 'you are a helpful assistant. 넌 사랑 전문가야. '}
+        {"role": "system", "content": 'you are a helpful assistant. 넌 절대 숫자를 출력하지 않아. 아까 출력한 숫자에 대한 근거를 영어로 알려주는 ai임. '}
     ]
 
 
 
 
     # 대화에 사용자 메시지 추가
-    messages2.append({"role": "user", "content": "사랑이란 뭐라고 생각해? 답변은 10자 이내여야 해."})
+    messages2.append({"role": "user", "content": "방금 출력한 6자리 로또 출력에 대한 근거만 영어로 말해. 답변은 50자 이내여야 해."})
 
     # OpenAI API 호출
     response2 = client.chat.completions.create(
@@ -60,26 +71,35 @@ def fff(request):
     bot_response2 = response2.choices[0].message.content
 
                         
+# =============================================            
             
-            
-            
-        # #동대문구 지도
-        # G = ox.graph_from_place('동대문구, 서울, 대한민국', network_type="drive", truncate_by_edge=True)
 
-        # # 원점과 목적지 노드 찾기
-        # orig_node = ox.nearest_nodes(G, float(user_input1_x), float(user_input1_y))  # 출발지 (경도, 위도)
-        # dest_node = ox.nearest_nodes(G, float(user_input2_x), float(user_input2_y))   # 도착치 (경도, 위도)
 
-        # # 최단 경로 계산
-        # route = nx.shortest_path(G, orig_node, dest_node, weight='length')
+    messages3 = [
+        {"role": "system", "content": 'you are a helpful assistant. Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 300 characters.'}
+    ]
+
+
+
+
+    # 대화에 사용자 메시지 추가
+    messages3.append({"role": "user", "content" : "Tell me todays financial fortune. Speak in English, be kind, and keep the answer under 300 characters."})
+
+    # OpenAI API 호출
+    response3 = client.chat.completions.create(
+        model="gpt-4.1-nano",  # 모델 이름 수정
+        messages=messages3
+    )
+    bot_response3 = response3.choices[0].message.content
 
 
     # 템플릿에 전달할 데이터
     context = {
         'title': title,
         'q': q,
-        'bot_response': bot_response,
-        'bot_response2': bot_response2,
+        '로또번호': bot_response,
+        '답변근거': bot_response2,
+        '금전운': bot_response3,
         'a' : 8
         # 'map': fig
         # , ax
