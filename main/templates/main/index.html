@@ -113,6 +113,52 @@
     .c6 { background-color: #577590; }
     .c7 { background-color: #277da1; }
 
+    /*today luck css*/
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 2rem;
+      background-color: #f0f8ff;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .fortune-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input[type="date"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    #fortune-result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      padding: 1rem;
+      background-color: #fff8dc;
+      border-left: 5px solid gold;
+      border-radius: 0.5rem;
+    }
+
+ 
  
     </style>
 </head>
@@ -157,8 +203,46 @@
 <!-- <p>=========================================================</p> -->
 
 <!-- <p>승열님 작업공간</p> -->
+<!-- <p>today LUCK</p> -->
+
+<div class="fortune-section">
+    <h2>🎂 생일로 보는 오늘의 금전운</h2>
+    <input type="date" id="birthdate" />
+    <button onclick="checkFortune()">운세 보기</button>
+    <div id="fortune-result"></div>
+  </div>
+  <script>
+    function checkFortune() {
+      const birth = document.getElementById("birthdate").value;
+      const resultBox = document.getElementById("fortune-result");
+
+      if (!birth) {
+        resultBox.innerText = "생일을 선택해주세요!";
+        return;
+      }}
+      let message;
+
+      </script>
+
+
+<!-- <p>Lotto number</p> -->
 
   <div class="scroll-box">
+
+    <!-- 1173회 -->
+    <div class="lotto-card">
+      <h3>1173회</h3>
+      <p class="numbers">
+        <span class="c1">1</span>
+        <span class="c2">5</span>
+        <span class="c3">18</span>
+        <span class="c4">20</span>
+        <span class="c5">30</span>
+        <span class="c6">35</span>
+        <span class="c7">3</span>
+      </p>
+      <p>1등 총 상금: 28,318,705,512원</p>
+    </div>
 
     <!-- 1172회 -->
     <div class="lotto-card">
