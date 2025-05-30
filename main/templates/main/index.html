@@ -237,6 +237,12 @@
   </div>
 </div>
 
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="generateNewLotto()" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    🎲 새로운 번호 추출
+  </button>
+</div>
+
   <script>
     function calculateRound() {
       const baseRound = 1172;
@@ -253,8 +259,6 @@
     }
 
     function insertLottoNumbers() {
-      // 서버 혹은 템플릿 엔진에서 {{로또번호}} 부분이 실제 숫자로 치환되어야 합니다.
-      // 예시: "3,12,25,33,41,45"
       const lottoData = "{{로또번호}}";
       const numbers = lottoData.split(',').map(n => n.trim());
       const balls = document.querySelectorAll('.lotto-container .ball');
@@ -263,7 +267,7 @@
         balls[i].textContent = numbers[i];
 
         const num = parseInt(numbers[i]);
-        balls[i].className = 'ball'; // 초기화
+        balls[i].className = 'ball'; 
 
         if (num <= 10) balls[i].classList.add('yellow');
         else if (num <= 20) balls[i].classList.add('blue');
@@ -278,6 +282,11 @@
       document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
       insertLottoNumbers();
     };
+
+    function generateNewLotto() {
+  insertLottoNumbers();
+}
+
   </script>
 
 <br><br><br><br><br>
