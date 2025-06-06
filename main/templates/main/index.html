@@ -174,6 +174,83 @@
       text-align: center;
     }
 
+
+ /*random lotto number css*/
+
+
+     body {
+      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      padding: 2rem;
+    }
+    .lotto-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      min-width: 350px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    input[type="number"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      flex: 1;
+      height: 2.5rem;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      height: 2.5rem;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    #lotto-result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      padding: 1rem;
+      background-color: #fff8dc;
+      border-left: 5px solid gold;
+      border-radius: 0.5rem;
+      min-height: 60px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .lotto-balls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .lotto-ball {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
       
     </style>
 </head>
@@ -239,6 +316,40 @@
   </script>
 </div>
 
+<!-- <p>Random lotto number</p> -->
+
+ <div class="lotto-box">
+ <div class="lotto-section">
+    <h2>🎱 로또 번호 추천</h2>
+    <div class="input-row">
+      <input type="number" id="user-lotto" min="1" max="45" placeholder="1~45 중 1개 입력" />
+      <button onclick="generateLotto()">추천받기</button>
+    </div>
+    <div id="lotto-result"></div>
+  </div>
+  <script>
+    // 페이지 로드 시 안내 메시지 표시
+    window.onload = function() {
+      document.getElementById("lotto-result").innerText = "1~45 사이의 숫자를 입력하세요!";
+    };
+
+    function generateLotto() {
+      const userNum = parseInt(document.getElementById("user-lotto").value, 10);
+      const resultBox = document.getElementById("lotto-result");
+
+      if (isNaN(userNum) || userNum < 1 || userNum > 45) {
+        resultBox.innerText = "1~45 사이의 숫자를 입력하세요!";
+        return;
+      }
+
+      let lotto = [userNum];
+      while (lotto.length < 6) {
+        let n = Math.floor(Math.random() * 45) + 1;
+        if (!lotto.includes(n)) {
+          lotto.push(n);
+        }
+      }
+      lotto.sort((a, b) => a - b);
 <!-- <p>Lotto number</p> -->
 
   <div class="scroll-box">
