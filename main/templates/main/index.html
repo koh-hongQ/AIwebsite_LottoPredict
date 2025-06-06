@@ -113,15 +113,12 @@
     .c6 { background-color: #577590; }
     .c7 { background-color: #277da1; }
 
-    /*today luck css*/
+/*today luck css*/
+    
     body {
       font-family: 'Arial', sans-serif;
       padding: 2rem;
       background-color: #f0f8ff;
-    }
-
-    h2 {
-      color: #333;
     }
 
     .fortune-section {
@@ -132,34 +129,52 @@
       max-width: 400px;
       margin: auto;
     }
-
-    input[type="date"] {
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-right: 0.5rem;
+    .fortune-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    button {
-      padding: 0.5rem 1rem;
+    .fortune-header h2 {
+      color: #333;
+      margin: 0;
+      font-size: 1.3rem;
+      flex: 1;
+      white-space: nowrap;
+    }
+
+    .fortune-btn {
+      padding: 0.5rem 1.2rem;
       font-size: 1rem;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
+      transition: background 0.2s;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(76,175,80,0.08);
+    }
+    .fortune-btn:hover {
+      background-color: #388e3c;
     }
 
     #fortune-result {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-size: 1.2rem;
       padding: 1rem;
       background-color: #fff8dc;
       border-left: 5px solid gold;
       border-radius: 0.5rem;
+      min-height: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
- 
- 
+      
     </style>
 </head>
 
@@ -203,27 +218,26 @@
 <!-- <p>=========================================================</p> -->
 
 <!-- <p>승열님 작업공간</p> -->
+
 <!-- <p>today LUCK</p> -->
 
+<div class="main-container">
+  <div class="today-luck-box">
 <div class="fortune-section">
-    <h2>🎂 생일로 보는 오늘의 금전운</h2>
-    <input type="date" id="birthdate" />
-    <button onclick="checkFortune()">운세 보기</button>
+    <div class="fortune-header">
+      <h2>🍀Fortune of today🍀</h2>
+      <button class="fortune-btn" onclick="checkFortune()">운세 보기</button>
+    </div>
     <div id="fortune-result"></div>
   </div>
   <script>
     function checkFortune() {
-      const birth = document.getElementById("birthdate").value;
       const resultBox = document.getElementById("fortune-result");
-
-      if (!birth) {
-        resultBox.innerText = "생일을 선택해주세요!";
-        return;
-      }}
-      let message;
-
-      </script>
-
+      let message = "{{금전운}}"; // 실제 메시지로 대체
+      resultBox.innerText = message;
+    }
+  </script>
+</div>
 
 <!-- <p>Lotto number</p> -->
 
