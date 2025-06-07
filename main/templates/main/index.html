@@ -4,6 +4,83 @@
     <meta charset="UTF-8">
     <title>로또 추천 website</title>
     <style>
+      
+
+      /* 로그인 화면 스타일 */
+      .welcome-text {
+        font-size: 1.2rem;
+        color: #eee727;
+      }
+
+      .logout-btn {
+        padding: 0.5rem 1rem;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .logout-btn:hover {
+        background-color: #c0392b;
+      }
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+      }
+
+      .login-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .login-box h2 {
+        color: #333;
+        margin-bottom: 2rem;
+      }
+
+      .login-box input {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+
+      .login-box button {
+        width: 100%;
+        padding: 1rem;
+        background-color: #667eea;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .login-box button:hover {
+        background-color: #5a6fd8;
+      }
+
+      .login-info {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 1rem;
+        line-height: 1.4;
+      }
+
         /* General Body & Background Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -186,6 +263,25 @@
 </head>
 
 <body>
+  <!-- 로그인 화면 -->
+  <div id="login-screen" class="login-container">
+    <div class="login-box">
+      <h2>AI Lotto Predict Website</h2>
+      <input type="text" id="username" placeholder="Enter your ID" required>
+      <button onclick="login()">Login</button>
+      <div class="login-info">
+        Enter your ID<br>
+        Individual history is managed for each user.
+      </div>
+    </div>
+  </div>
+
+  <!-- 메인 화면 -->
+  <div id="main-screen" class="main-content">
+    <div class="header">
+      <h1 id="welcome" class="welcome-text">Welcome!</h1>
+      <button class="logout-btn" onclick="logout()" style="float: right;">Logout</button>
+    </div>
     <div class="container">
         <div class="intro-section">
             <h2>🎉 Discover Your Luck!</h2>
@@ -203,7 +299,44 @@
             </div>
         </div>
     </div>
+<script>
+      // 로그인 관련 함수들
+    function login() {
+      const username = document.getElementById('username').value.trim();
 
+      if (!username) {
+        alert('Enter your ID');
+        return;
+      }
+
+      if (username.length < 2) {
+        alert('Please enter at least 2 characters for the user name.');
+        return;
+      }
+
+      // 세션 스토리지에 로그인 정보 저장
+      sessionStorage.setItem('loggedInUser', username);
+      showMainScreen();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('loggedInUser');
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('main-screen').style.display = 'none';
+      document.getElementById('username').value = '';
+    }
+
+    function showMainScreen() {
+      const user = sessionStorage.getItem('loggedInUser');
+      if (user) {
+        document.getElementById('welcome').textContent = `Welcome, ${user}!`;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-screen').style.display = 'block';
+        initializeMain();
+      }
+    }
+
+</script>
 </body>
 
 </html>
