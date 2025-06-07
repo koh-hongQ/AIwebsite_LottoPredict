@@ -231,26 +231,26 @@
 <body>
     <div class="container">
          <div class="navbar">
-        <a href="{% url 'hi' %}" >🏠 홈으로</a>
-        <a href="{% url 'fortune_check' %}" >🎂 오늘의 금전운</a>
-        <a href="{% url 'lotto_history' %}" >📜 역대 당첨 번호</a>
-        <a href="{% url 'lotto_combiner' %}" >➕ 번호 조합기</a>
+        <a href="{% url 'hi' %}" >🏠 Home</a>
+        <a href="{% url 'fortune_check' %}" >🎂 Today's Financial Fortune</a>
+        <a href="{% url 'lotto_history' %}" >📜 Lottery History</a>
+        <a href="{% url 'lotto_combiner' %}" >➕ Lottery Number Combiner</a>
     </div>
-        <h1>나만의 로또 번호 조합기 ✨</h1>
+        <h1>My Own Lotto Number Combiner  ✨</h1>
         <p class="description">
-            행운의 번호를 **최대 5개** 선택하고, 나머지는 자동으로 채워 나만의 로또를 조합해 보세요!
+            Select **up to 5** lucky numbers, and the rest will be filled automatically to create your personalized lotto combination!
         </p>
 
-        <h3>1. 번호 선택</h3>
+        <h3>1. Number Selection</h3>
         <div class="number-selection-grid" id="number-selection-grid">
             </div>
 
         <div class="button-group">
-            <button onclick="generateCombinedLotto()">🎯 로또 번호 조합하기</button>
-            <button class="reset-button" onclick="resetSelection()">🔄 선택 초기화</button>
+            <button onclick="generateCombinedLotto()">🎯 Combine Lotto Numbers</button>
+            <button class="reset-button" onclick="resetSelection()">🔄 Reset Selection</button>
         </div>
 
-        <h3>2. 조합된 로또 번호</h3>
+        <h3>2. Combined Lotto Numbers</h3>
         <div id="combined-lotto-balls">
             </div>
     </div>

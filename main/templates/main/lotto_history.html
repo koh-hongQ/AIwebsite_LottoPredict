@@ -200,13 +200,14 @@
 <body>
     <div class="container">
             <div class="navbar">
-        <a href="{% url 'hi' %}" >🏠 홈으로</a>
-        <a href="{% url 'fortune_check' %}" >🎂 오늘의 금전운</a>
-        <a href="{% url 'lotto_history' %}" >📜 역대 당첨 번호</a>
-        <a href="{% url 'lotto_combiner' %}" >➕ 번호 조합기</a>
+        <a href="{% url 'hi' %}" >🏠 Home</a>
+        <a href="{% url 'fortune_check' %}" >🎂 Today's Financial Fortune</a>
+        <a href="{% url 'lotto_history' %}" >📜 Lottery History
+</a>
+        <a href="{% url 'lotto_combiner' %}" >➕ Lottery Number Combiner</a>
     </div>
         <div id="history-section" class="history-section">
-            <h2>최근 로또 당첨 번호</h2>
+            <h2>Lottery History</h2>
             <div class="scroll-box">
                 <div class="lotto-card">
                     <h3>1173회</h3>
