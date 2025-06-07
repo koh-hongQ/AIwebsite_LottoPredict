@@ -71,7 +71,8 @@
 	.title-image {
 		width: 600px;
 		height: auto;
-		display: inline-block;
+		display: block;
+		margin: 0 auto;
 	}
   
 
@@ -115,6 +116,26 @@
 
 /*today luck css*/
     
+    @media (max-width: 600px) {
+  .lotto-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ball {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .title-image {
+    width: 100%;
+    height: auto;
+  }
+} 
+
+
+    /*today luck css*/
+
     body {
       font-family: 'Arial', sans-serif;
       padding: 2rem;
@@ -251,6 +272,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
+
 /*luck box and random number box location*/
 .main-container {
   display: flex;
@@ -270,14 +292,34 @@
   text-align: center;
 }
 
-      
+
+ 
+
     </style>
 </head>
 
 
 <body>
 <!-- <p>성은님 작업공간</p> -->
+  <h1 id = "welcome"></h1>
+  <button onclick="logout()">LOGOUT</button>
 
+	<script>
+		const user = sessionStorge.getItem('loggedInUser');
+		const welcomeText = document.getElementById('welcome');
+		
+		if(user){
+			welcomeText.innerText = 'Success LogIn';
+		}else{
+			alert('No Information');
+			window.location.href = 'loginScreen.html';
+		}
+
+		function logout(){
+			sessionStorage.removeItem('loggedInUser');
+			window.location.href = 'loginScreen.html';
+		}
+	</script>
 <!-- <p>배경, 제목, 전체적인 디자인 틀</p> -->
 <img src="https://blog.kakaocdn.net/dn/mWAxU/btqDpfejsMm/Ysp2b30tARwjbatmFm3kWK/img.jpg" class="title-image">
 
@@ -288,9 +330,9 @@
 <!-- <p>테스트: AI, 사랑이란 뭐라고 생각해?</p> -->
 <!-- <p>AI: {{bot_response2}}<br></p> -->
 
-<p>{{로또번호}}<br></p>
+<!-- <p>{{로또번호}}<br></p> -->
 <p>{{답변근거}}<br></p>
-<p>{{금전운}}<br></p>
+<!-- <p>{{금전운}}<br></p> -->
 <!-- <p>=========================================================</p> -->
 
 <!-- <p>준엽님 작업공간</p> -->
@@ -309,6 +351,58 @@
     </div>
   </div>
 </div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="generateNewLotto()" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    🎲 새로운 번호 추출
+  </button>
+</div>
+
+  <script>
+    function calculateRound() {
+      const baseRound = 1172;
+      const baseDate = new Date("2025-05-17T20:30:00");
+      const now = new Date();
+
+      const diffMs = now - baseDate;
+      const weekMs = 7 * 24 * 60 * 60 * 1000;
+      const fullWeeksPassed = Math.floor(diffMs / weekMs);
+
+      const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
+
+      return baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
+    }
+
+    function insertLottoNumbers() {
+      const lottoData = "{{로또번호}}";
+      const numbers = lottoData.split(',').map(n => n.trim());
+      const balls = document.querySelectorAll('.lotto-container .ball');
+
+      for (let i = 0; i < balls.length && i < numbers.length; i++) {
+        balls[i].textContent = numbers[i];
+
+        const num = parseInt(numbers[i]);
+        balls[i].className = 'ball'; 
+
+        if (num <= 10) balls[i].classList.add('yellow');
+        else if (num <= 20) balls[i].classList.add('blue');
+        else if (num <= 30) balls[i].classList.add('red');
+        else if (num <= 40) balls[i].classList.add('gray');
+        else balls[i].classList.add('green');
+      }
+    }
+
+    window.onload = function () {
+      const round = calculateRound();
+      document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
+      insertLottoNumbers();
+    };
+
+    function generateNewLotto() {
+  insertLottoNumbers();
+}
+
+  </script>
 
 <br><br><br><br><br>
 <!-- <p>=========================================================</p> -->
@@ -351,6 +445,15 @@
     window.onload = function() {
       document.getElementById("lotto-result").innerText = "1~45 사이의 숫자를 입력하세요!";
     };
+
+      if (!birth) {
+        resultBox.innerText = "생일을 선택해주세요!";
+        return;
+      }
+      let message = "{{금전운}}";
+      resultBox.innerText = message;
+    }
+
 
     function generateLotto() {
       const userNum = parseInt(document.getElementById("user-lotto").value, 10);
