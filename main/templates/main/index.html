@@ -114,6 +114,8 @@
     .c6 { background-color: #577590; }
     .c7 { background-color: #277da1; }
 
+/*today luck css*/
+    
     @media (max-width: 600px) {
   .lotto-container {
     flex-wrap: wrap;
@@ -133,14 +135,11 @@
 
 
     /*today luck css*/
+
     body {
       font-family: 'Arial', sans-serif;
       padding: 2rem;
       background-color: #f0f8ff;
-    }
-
-    h2 {
-      color: #333;
     }
 
     .fortune-section {
@@ -151,13 +150,86 @@
       max-width: 400px;
       margin: auto;
     }
+    .fortune-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
-    input[type="date"] {
+    .fortune-header h2 {
+      color: #333;
+      margin: 0;
+      font-size: 1.3rem;
+      flex: 1;
+      white-space: nowrap;
+    }
+
+    .fortune-btn {
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(76,175,80,0.08);
+    }
+    .fortune-btn:hover {
+      background-color: #388e3c;
+    }
+
+    #fortune-result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      padding: 1rem;
+      background-color: #fff8dc;
+      border-left: 5px solid gold;
+      border-radius: 0.5rem;
+      min-height: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+
+ /*random lotto number css*/
+
+
+     body {
+      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      padding: 2rem;
+    }
+    .lotto-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      min-width: 350px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    input[type="number"] {
       padding: 0.5rem;
       font-size: 1rem;
       margin-right: 0.5rem;
+      flex: 1;
+      height: 2.5rem;
+      box-sizing: border-box;
     }
-
     button {
       padding: 0.5rem 1rem;
       font-size: 1rem;
@@ -166,18 +238,61 @@
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
+      height: 2.5rem;
+      white-space: nowrap;
+      box-sizing: border-box;
     }
-
-    #fortune-result {
+    #lotto-result {
       margin-top: 1rem;
       font-size: 1.2rem;
       padding: 1rem;
       background-color: #fff8dc;
       border-left: 5px solid gold;
       border-radius: 0.5rem;
+      min-height: 60px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .lotto-balls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .lotto-ball {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
- 
+
+/*luck box and random number box location*/
+.main-container {
+  display: flex;
+  justify-content: center;   /* 가운데 정렬 */
+  align-items: flex-start;   /* 위쪽 정렬, 필요에 따라 center로 조정 */
+  gap: 200px;                 /* 두 박스 사이 간격 (원하는 값으로 조정) */
+
+}
+
+.today-luck-box,
+ {
+  width: 320px;              /* 박스 크기, 필요에 따라 조정 */
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+
  
 
     </style>
@@ -293,18 +408,43 @@
 <!-- <p>=========================================================</p> -->
 
 <!-- <p>승열님 작업공간</p> -->
+
 <!-- <p>today LUCK</p> -->
 
+<div class="main-container">
+  <div class="today-luck-box">
 <div class="fortune-section">
-    <h2>🎂 생일로 보는 오늘의 금전운</h2>
-    <input type="date" id="birthdate" />
-    <button onclick="checkFortune()">운세 보기</button>
+    <div class="fortune-header">
+      <h2>🍀Fortune of today🍀</h2>
+      <button class="fortune-btn" onclick="checkFortune()">운세 보기</button>
+    </div>
     <div id="fortune-result"></div>
   </div>
   <script>
     function checkFortune() {
-      const birth = document.getElementById("birthdate").value;
       const resultBox = document.getElementById("fortune-result");
+      let message = "{{금전운}}"; // 실제 메시지로 대체
+      resultBox.innerText = message;
+    }
+  </script>
+</div>
+
+<!-- <p>Random lotto number</p> -->
+
+ <div class="lotto-box">
+ <div class="lotto-section">
+    <h2>🎱 로또 번호 추천</h2>
+    <div class="input-row">
+      <input type="number" id="user-lotto" min="1" max="45" placeholder="1~45 중 1개 입력" />
+      <button onclick="generateLotto()">추천받기</button>
+    </div>
+    <div id="lotto-result"></div>
+  </div>
+  <script>
+    // 페이지 로드 시 안내 메시지 표시
+    window.onload = function() {
+      document.getElementById("lotto-result").innerText = "1~45 사이의 숫자를 입력하세요!";
+    };
 
       if (!birth) {
         resultBox.innerText = "생일을 선택해주세요!";
@@ -314,12 +454,42 @@
       resultBox.innerText = message;
     }
 
-      </script>
 
+    function generateLotto() {
+      const userNum = parseInt(document.getElementById("user-lotto").value, 10);
+      const resultBox = document.getElementById("lotto-result");
 
+      if (isNaN(userNum) || userNum < 1 || userNum > 45) {
+        resultBox.innerText = "1~45 사이의 숫자를 입력하세요!";
+        return;
+      }
+
+      let lotto = [userNum];
+      while (lotto.length < 6) {
+        let n = Math.floor(Math.random() * 45) + 1;
+        if (!lotto.includes(n)) {
+          lotto.push(n);
+        }
+      }
+      lotto.sort((a, b) => a - b);
 <!-- <p>Lotto number</p> -->
 
   <div class="scroll-box">
+
+<!-- 1174회 -->
+    <div class="lotto-card">
+      <h3>1174회</h3>
+      <p class="numbers">
+        <span class="c1">8</span>
+        <span class="c2">11</span>
+        <span class="c3">14</span>
+        <span class="c4">17</span>
+        <span class="c5">36</span>
+        <span class="c6">39</span>
+        <span class="c7">22</span>
+      </p>
+      <p>1등 총 상금: 28,659,291,375원</p>
+    </div>
 
     <!-- 1173회 -->
     <div class="lotto-card">
