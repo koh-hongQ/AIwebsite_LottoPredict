@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>역대 당첨 번호 - 로또 추천 website</title>
+    <style>
+        /* General Body & Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; /* 밝은 회색 텍스트로 대비 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+            background-attachment: fixed;
+            overflow-x: hidden; /* 가로 스크롤바 방지 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for better structure */
+        .container {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: rgba(34, 49, 63, 0.9); /* 어두운 반투명 배경 */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .navbar a {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Lotto Ball Colors */
+        .color-1-10 { background-color: #f39c12; }
+        .color-11-20 { background-color: #3498db; }
+        .color-21-30 { background-color: #e74c3c; }
+        .color-31-40 { background-color: #95a5a6; }
+        .color-41-45 { background-color: #27ae60; }
+
+        /* Lotto History Scroll Box */
+        .history-section h2 {
+            color: #f1c40f;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .scroll-box {
+            height: 500px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 40px;
+            width: 100%; /* 너비 100%로 설정 */
+            box-sizing: border-box; /* 패딩, 보더 포함 너비 계산 */
+        }
+
+        .lotto-card {
+            padding: 25px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(52, 73, 94, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .lotto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .lotto-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #f1c40f;
+            font-size: 1.4em;
+        }
+
+        .numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .numbers .ball-history {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            line-height: 42px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2em;
+            box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .numbers .bonus-ball {
+            border: 2px dashed #f1c40f; /* 보너스 볼은 점선 테두리 */
+        }
+
+        .lotto-card p {
+            margin: 0;
+            font-size: 1em;
+            color: #bdc3c7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .navbar button {
+                margin: 5px;
+                font-size: 0.9em;
+            }
+            .history-section h2 {
+                font-size: 1.8em;
+            }
+            .scroll-box {
+                height: 380px;
+                padding: 15px;
+            }
+            .lotto-card {
+                padding: 18px;
+                margin-bottom: 15px;
+            }
+            .lotto-card h3 {
+                font-size: 1.2em;
+            }
+            .numbers .ball-history {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .navbar button {
+                padding: 8px 15px;
+            }
+            .history-section h2 {
+                font-size: 1.5em;
+            }
+            .numbers .ball-history {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+            <div class="navbar">
+        <a href="{% url 'hi' %}" >🏠 Home</a>
+        <a href="{% url 'fortune_check' %}" >🎂 Today's Financial Fortune</a>
+        <a href="{% url 'lotto_history' %}" >📜 Lottery History
+</a>
+        <a href="{% url 'lotto_combiner' %}" >➕ Lottery Number Combiner</a>
+    </div>
+        <div id="history-section" class="history-section">
+            <h2>Lottery History</h2>
+            <div class="scroll-box">
+                <div class="lotto-card">
+                    <h3>1173회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">1</span>
+                        <span class="ball-history">5</span>
+                        <span class="ball-history">18</span>
+                        <span class="ball-history">20</span>
+                        <span class="ball-history">30</span>
+                        <span class="ball-history">35</span>
+                        <span class="ball-history bonus-ball">3</span>
+                    </p>
+                    <p>1등 총 상금: 28,318,705,512원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1172회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">7</span>
+                        <span class="ball-history">9</span>
+                        <span class="ball-history">24</span>
+                        <span class="ball-history">40</span>
+                        <span class="ball-history">42</span>
+                        <span class="ball-history">44</span>
+                        <span class="ball-history bonus-ball">45</span>
+                    </p>
+                    <p>1등 총 상금: 28,639,057,876원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1171회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">3</span>
+                        <span class="ball-history">6</span>
+                        <span class="ball-history">7</span>
+                        <span class="ball-history">11</span>
+                        <span class="ball-history">12</span>
+                        <span class="ball-history">17</span>
+                        <span class="ball-history bonus-ball">19</span>
+                    </p>
+                    <p>1등 총 상금: 23,695,251,006원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1170회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">3</span>
+                        <span class="ball-history">13</span>
+                        <span class="ball-history">28</span>
+                        <span class="ball-history">34</span>
+                        <span class="ball-history">38</span>
+                        <span class="ball-history">42</span>
+                        <span class="ball-history bonus-ball">25</span>
+                    </p>
+                    <p>1등 총 상금: 27,731,019,380원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1169회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">5</span>
+                        <span class="ball-history">12</span>
+                        <span class="ball-history">24</span>
+                        <span class="ball-history">26</span>
+                        <span class="ball-history">39</span>
+                        <span class="ball-history">42</span>
+                        <span class="ball-history bonus-ball">20</span>
+                    </p>
+                    <p>1등 총 상금: 28,527,358,130원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1168회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">9</span>
+                        <span class="ball-history">21</span>
+                        <span class="ball-history">24</span>
+                        <span class="ball-history">30</span>
+                        <span class="ball-history">33</span>
+                        <span class="ball-history">37</span>
+                        <span class="ball-history bonus-ball">29</span>
+                    </p>
+                    <p>1등 총 상금: 27,776,266,882원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1167회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">8</span>
+                        <span class="ball-history">23</span>
+                        <span class="ball-history">31</span>
+                        <span class="ball-history">35</span>
+                        <span class="ball-history">39</span>
+                        <span class="ball-history">40</span>
+                        <span class="ball-history bonus-ball">24</span>
+                    </p>
+                    <p>1등 총 상금: 28,840,879,130원</p>
+                </div>
+                <div class="lotto-card">
+                    <h3>1166회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">14</span>
+                        <span class="ball-history">23</span>
+                        <span class="ball-history">25</span>
+                        <span class="ball-history">27</span>
+                        <span class="ball-history">29</span>
+                        <span class="ball-history">42</span>
+                        <span class="ball-history bonus-ball">16</span>
+                    </p>
+                    <p>1등 총 상금: 29,012,479,132원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1165회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">6</span>
+                        <span class="ball-history">7</span>
+                        <span class="ball-history">27</span>
+                        <span class="ball-history">29</span>
+                        <span class="ball-history">38</span>
+                        <span class="ball-history">45</span>
+                        <span class="ball-history bonus-ball">17</span>
+                    </p>
+                    <p>1등 총 상금: 28,502,308,510원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1164회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">17</span>
+                        <span class="ball-history">18</span>
+                        <span class="ball-history">23</span>
+                        <span class="ball-history">25</span>
+                        <span class="ball-history">38</span>
+                        <span class="ball-history">39</span>
+                        <span class="ball-history bonus-ball">22</span>
+                    </p>
+                    <p>1등 총 상금: 28,510,198,132원</p>
+                </div>
+
+                <div class="lotto-card">
+                    <h3>1163회</h3>
+                    <p class="numbers">
+                        <span class="ball-history">2</span>
+                        <span class="ball-history">13</span>
+                        <span class="ball-history">15</span>
+                        <span class="ball-history">16</span>
+                        <span class="ball-history">33</span>
+                        <span class="ball-history">43</span>
+                        <span class="ball-history bonus-ball">4</span>
+                    </p>
+                    <p>1등 총 상금: 29,053,367,250원</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getBallColorClass(num) {
+            if (num >= 1 && num <= 10) return 'color-1-10';
+            else if (num >= 11 && num <= 20) return 'color-11-20';
+            else if (num >= 21 && num <= 30) return 'color-21-30';
+            else if (num >= 31 && num <= 40) return 'color-31-40';
+            else if (num >= 41 && num <= 45) return 'color-41-45';
+            return '';
+        }
+
+        function applyHistoryBallColors() {
+            const historyNumberElements = document.querySelectorAll('.numbers .ball-history');
+            historyNumberElements.forEach(ballElement => {
+                const num = parseInt(ballElement.textContent);
+                ballElement.classList.add(getBallColorClass(num));
+            });
+        }
+
+        window.onload = function() {
+            applyHistoryBallColors();
+        };
+    </script>
+</body>
+</html>

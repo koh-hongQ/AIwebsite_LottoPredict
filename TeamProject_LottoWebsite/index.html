@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 추천 website</title>
+    <style>
+        /* General Body & Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; /* 밝은 회색 텍스트로 대비 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+            background-attachment: fixed;
+            overflow-x: hidden; /* 가로 스크롤바 방지 */
+            scroll-behavior: smooth; /* 부드러운 스크롤 이동 */
+            justify-content: center; /* 수직 중앙 정렬 */
+            align-items: center; /* 수평 중앙 정렬 */
+        }
+
+        /* Container for better structure */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: rgba(34, 49, 63, 0.9); /* 어두운 반투명 배경 */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+            box-sizing: border-box;
+            display: flex; /* flexbox 사용 */
+            flex-direction: column; /* 세로 정렬 */
+            align-items: center; /* 수평 중앙 정렬 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+
+        /* Introduction Section (New) */
+        .intro-section {
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 50px;
+            background-color: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%; /* 너비 100%로 설정 */
+            box-sizing: border-box; /* 패딩, 보더 포함 너비 계산 */
+        }
+
+        .intro-section h2 {
+            color: #f1c40f;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.1em;
+            color: #bdc3c7;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap; /* 이제 항상 줄바꿈이 가능하도록 'wrap'으로 설정 */
+            /* overflow-x: auto; 제거 */ /* 가로 스크롤바 방지 */
+            /* padding-bottom: 10px; 제거 (스크롤바 없으므로 필요 없음) */
+        }
+
+        .intro-buttons .main-nav-button {
+            padding: 18px 35px;
+            font-size: 1.2em;
+            background-color: #f1c40f; /* 골드 */
+            color: #2c3e50;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(241, 196, 15, 0.4);
+            font-weight: bold;
+            flex-shrink: 0; /* 버튼이 줄어들지 않도록 설정 */
+        }
+
+        .intro-buttons .main-nav-button:hover {
+            background-color: #e6b10e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(241, 196, 15, 0.6);
+        }
+        .intro-buttons .main-nav-button.secondary { /* 보조 버튼 색상 */
+            background-color: #3498db; /* 블루 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+        .intro-buttons .main-nav-button.secondary:hover {
+            background-color: #2980b9;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+        }
+        .intro-buttons .main-nav-button.tertiary { /* 보조 버튼 색상 */
+            background-color: #e67e22; /* 오렌지 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+        }
+        .intro-buttons .main-nav-button.tertiary:hover {
+            background-color: #d35400;
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6);
+        }
+        /* 새로운 버튼 스타일 추가 */
+        .intro-buttons .main-nav-button.quaternary {
+            background-color: #9b59b6; /* 보라색 계열 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(155, 89, 182, 0.4);
+        }
+        .intro-buttons .main-nav-button.quaternary:hover {
+            background-color: #8e44ad;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                margin: 15px auto;
+                padding: 25px;
+            }
+            .intro-buttons .main-nav-button {
+                padding: 12px 30px;
+                font-size: 1.1em;
+            }
+            .intro-section h2 {
+                font-size: 2em;
+            }
+        }
+
+        /* 768px 미만에서 버튼 정렬을 더 유연하게 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 10px auto;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .intro-section {
+                padding: 40px 15px;
+            }
+            .intro-section h2 {
+                font-size: 1.8em;
+            }
+            .intro-section p {
+                font-size: 1em;
+            }
+            .intro-buttons {
+                flex-direction: column; /* 작은 화면에서 버튼들을 세로로 정렬 */
+                gap: 15px; /* 세로 간격 유지 */
+            }
+            .intro-buttons .main-nav-button {
+                padding: 10px 25px;
+                font-size: 1em;
+                width: 100%; /* 버튼이 전체 너비를 차지하도록 설정 */
+                box-sizing: border-box; /* 패딩 포함 너비 계산 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .intro-section h2 {
+                font-size: 1.5em;
+            }
+            .intro-buttons .main-nav-button {
+                padding: 8px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="intro-section">
+            <h2>🎉 당신의 행운을 찾아보세요!</h2>
+            <p>
+                저희 로또 추천 웹사이트에 오신 것을 환영합니다.<br>
+                GPT가 추천하는 특별한 로또 번호와 생일 운세로 당신의 행운을 예측해보세요.<br>
+                역대 로또 당첨 번호도 확인하실 수 있습니다.
+            </p>
+            <div class="intro-buttons">
+                <button class="main-nav-button" onclick="location.href='lotto_predict.html'">✨ 예상 번호 추출</button>
+                <button class="main-nav-button secondary" onclick="location.href='fortune_check.html'">🎂 오늘의 금전운</button>
+                <button class="main-nav-button tertiary" onclick="location.href='lotto_history.html'">📜 역대 당첨 번호</button>
+                <button class="main-nav-button quaternary" onclick="location.href='lotto_combiner.html'">➕ 번호 조합기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

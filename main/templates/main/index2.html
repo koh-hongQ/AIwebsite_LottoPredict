@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>로또 추천 website</title>
+    <style>
+      .lotto-wrapper {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+        padding: 50px 20px;
+        margin: 30px 0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      .lotto-wrapper h1 {
+        font-size: 28px;
+        color: #222;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .header-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .header-row img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .header-row h2 {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+      }
+
+      .lotto-container {
+        display: flex;
+        gap: 15px;
+        margin-left: 20px;
+      }
+
+      .ball {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .yellow { background-color: #fbc02d; }
+      .blue   { background-color: #039be5; }
+      .red    { background-color: #e53935; }
+      .gray   { background-color: #757575; }
+      .green  { background-color: #43a047; }
+
+
+	body {
+		background-color: white;
+	}
+	.title-image {
+		width: 600px;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	}
+  
+
+    .scroll-box {
+      height: 400px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+    .lotto-card {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      background: white;
+      border-radius: 8px;
+    }
+    .lotto-card h3 {
+      margin-bottom: 5px;
+    }
+    .numbers span {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      margin-right: 5px;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* 예쁜 색상 7개 (회차당 랜덤 또는 순서고정 사용) */
+    .c1 { background-color: #f94144; }
+    .c2 { background-color: #f3722c; }
+    .c3 { background-color: #f9c74f; color: black; }
+    .c4 { background-color: #90be6d; }
+    .c5 { background-color: #43aa8b; }
+    .c6 { background-color: #577590; }
+    .c7 { background-color: #277da1; }
+
+    @media (max-width: 600px) {
+  .lotto-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ball {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .title-image {
+    width: 100%;
+    height: auto;
+  }
+} 
+
+
+    /*today luck css*/
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 2rem;
+      background-color: #f0f8ff;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .fortune-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input[type="date"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    #fortune-result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      padding: 1rem;
+      background-color: #fff8dc;
+      border-left: 5px solid gold;
+      border-radius: 0.5rem;
+    }
+
+ 
+ 
+
+    </style>
+</head>
+
+
+<body>
+<!-- <p>성은님 작업공간</p> -->
+  <h1 id = "welcome"></h1>
+  <button onclick="logout()">LOGOUT</button>
+
+	<script>
+		const user = sessionStorge.getItem('loggedInUser');
+		const welcomeText = document.getElementById('welcome');
+		
+		if(user){
+			welcomeText.innerText = 'Success LogIn';
+		}else{
+			alert('No Information');
+			window.location.href = 'loginScreen.html';
+		}
+
+		function logout(){
+			sessionStorage.removeItem('loggedInUser');
+			window.location.href = 'loginScreen.html';
+		}
+	</script>
+<!-- <p>배경, 제목, 전체적인 디자인 틀</p> -->
+<img src="https://blog.kakaocdn.net/dn/mWAxU/btqDpfejsMm/Ysp2b30tARwjbatmFm3kWK/img.jpg" class="title-image">
+
+<br><br><br><br><br>
+<!-- <p>=========================================================</p> -->
+
+<!-- <p>고홍규 작업공간</p> -->
+<!-- <p>테스트: AI, 사랑이란 뭐라고 생각해?</p> -->
+<!-- <p>AI: {{bot_response2}}<br></p> -->
+
+<!-- <p>{{로또번호}}<br></p> -->
+<p>{{답변근거}}<br></p>
+<!-- <p>{{금전운}}<br></p> -->
+<!-- <p>=========================================================</p> -->
+
+<!-- <p>준엽님 작업공간</p> -->
+<div class="lotto-wrapper">
+  <h1 id="round-title">0000회차의 예상 로또 번호</h1>
+  <div class="header-row">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="GPT 로고">
+    <h2>GPT의 로또 추천</h2>
+    <div class="lotto-container">
+      <div class="ball yellow"></div>
+      <div class="ball blue"></div>
+      <div class="ball red"></div>
+      <div class="ball gray"></div>
+      <div class="ball green"></div>
+      <div class="ball yellow"></div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="generateNewLotto()" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+    🎲 새로운 번호 추출
+  </button>
+</div>
+
+  <script>
+    function calculateRound() {
+      const baseRound = 1172;
+      const baseDate = new Date("2025-05-17T20:30:00");
+      const now = new Date();
+
+      const diffMs = now - baseDate;
+      const weekMs = 7 * 24 * 60 * 60 * 1000;
+      const fullWeeksPassed = Math.floor(diffMs / weekMs);
+
+      const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
+
+      return baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
+    }
+
+    function insertLottoNumbers() {
+      const lottoData = "{{로또번호}}";
+      const numbers = lottoData.split(',').map(n => n.trim());
+      const balls = document.querySelectorAll('.lotto-container .ball');
+
+      for (let i = 0; i < balls.length && i < numbers.length; i++) {
+        balls[i].textContent = numbers[i];
+
+        const num = parseInt(numbers[i]);
+        balls[i].className = 'ball'; 
+
+        if (num <= 10) balls[i].classList.add('yellow');
+        else if (num <= 20) balls[i].classList.add('blue');
+        else if (num <= 30) balls[i].classList.add('red');
+        else if (num <= 40) balls[i].classList.add('gray');
+        else balls[i].classList.add('green');
+      }
+    }
+
+    window.onload = function () {
+      const round = calculateRound();
+      document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
+      insertLottoNumbers();
+    };
+
+    function generateNewLotto() {
+  insertLottoNumbers();
+}
+
+  </script>
+
+<br><br><br><br><br>
+<!-- <p>=========================================================</p> -->
+
+<!-- <p>승열님 작업공간</p> -->
+<!-- <p>today LUCK</p> -->
+
+<div class="fortune-section">
+    <h2>🎂 생일로 보는 오늘의 금전운</h2>
+    <input type="date" id="birthdate" />
+    <button onclick="checkFortune()">운세 보기</button>
+    <div id="fortune-result"></div>
+  </div>
+  <script>
+    function checkFortune() {
+      const birth = document.getElementById("birthdate").value;
+      const resultBox = document.getElementById("fortune-result");
+
+      if (!birth) {
+        resultBox.innerText = "생일을 선택해주세요!";
+        return;
+      }
+      let message = "{{금전운}}";
+      resultBox.innerText = message;
+    }
+
+      </script>
+
+
+<!-- <p>Lotto number</p> -->
+
+  <div class="scroll-box">
+
+    <!-- 1173회 -->
+    <div class="lotto-card">
+      <h3>1173회</h3>
+      <p class="numbers">
+        <span class="c1">1</span>
+        <span class="c2">5</span>
+        <span class="c3">18</span>
+        <span class="c4">20</span>
+        <span class="c5">30</span>
+        <span class="c6">35</span>
+        <span class="c7">3</span>
+      </p>
+      <p>1등 총 상금: 28,318,705,512원</p>
+    </div>
+
+    <!-- 1172회 -->
+    <div class="lotto-card">
+      <h3>1172회</h3>
+      <p class="numbers">
+        <span class="c1">7</span>
+        <span class="c2">9</span>
+        <span class="c3">24</span>
+        <span class="c4">40</span>
+        <span class="c5">42</span>
+        <span class="c6">44</span>
+        <span class="c7">45</span>
+      </p>
+      <p>1등 총 상금: 28,639,057,876원</p>
+    </div>
+
+    <!-- 1171회 -->
+    <div class="lotto-card">
+      <h3>1171회</h3>
+      <p class="numbers">
+        <span class="c1">3</span>
+        <span class="c2">6</span>
+        <span class="c3">7</span>
+        <span class="c4">11</span>
+        <span class="c5">12</span>
+        <span class="c6">17</span>
+        <span class="c7">19</span>
+      </p>
+      <p>1등 총 상금: 23,695,251,006원</p>
+    </div>
+
+    <!-- 1170회 -->
+    <div class="lotto-card">
+      <h3>1170회</h3>
+      <p class="numbers">
+        <span class="c1">3</span>
+        <span class="c2">13</span>
+        <span class="c3">28</span>
+        <span class="c4">34</span>
+        <span class="c5">38</span>
+        <span class="c6">42</span>
+        <span class="c7">25</span>
+      </p>
+      <p>1등 총 상금: 27,731,019,380원</p>
+    </div>
+
+    <!-- 1169회 -->
+    <div class="lotto-card">
+      <h3>1169회</h3>
+      <p class="numbers">
+        <span class="c1">5</span>
+        <span class="c2">12</span>
+        <span class="c3">24</span>
+        <span class="c4">26</span>
+        <span class="c5">39</span>
+        <span class="c6">42</span>
+        <span class="c7">20</span>
+      </p>
+      <p>1등 총 상금: 28,527,358,130원</p>
+    </div>
+
+    <!-- 1168회 -->
+    <div class="lotto-card">
+      <h3>1168회</h3>
+      <p class="numbers">
+        <span class="c1">9</span>
+        <span class="c2">21</span>
+        <span class="c3">24</span>
+        <span class="c4">30</span>
+        <span class="c5">33</span>
+        <span class="c6">37</span>
+        <span class="c7">29</span>
+      </p>
+      <p>1등 총 상금: 27,776,266,882원</p>
+    </div>
+
+    <!-- 1167회 -->
+    <div class="lotto-card">
+      <h3>1167회</h3>
+      <p class="numbers">
+        <span class="c1">8</span>
+        <span class="c2">23</span>
+        <span class="c3">31</span>
+        <span class="c4">35</span>
+        <span class="c5">39</span>
+        <span class="c6">40</span>
+        <span class="c7">24</span>
+      </p>
+      <p>1등 총 상금: 28,840,879,130원</p>
+    </div>
+<div class="lotto-card">
+    <h3>1166회</h3>
+    <p class="numbers">
+      <span class="c1">14</span>
+      <span class="c2">23</span>
+      <span class="c3">25</span>
+      <span class="c4">27</span>
+      <span class="c5">29</span>
+      <span class="c6">42</span>
+      <span class="c7">16</span>
+    </p>
+    <p>1등 총 상금: 29,012,479,132원</p>
+  </div>
+
+  <!-- 1165회 -->
+  <div class="lotto-card">
+    <h3>1165회</h3>
+    <p class="numbers">
+      <span class="c1">6</span>
+      <span class="c2">7</span>
+      <span class="c3">27</span>
+      <span class="c4">29</span>
+      <span class="c5">38</span>
+      <span class="c6">45</span>
+      <span class="c7">17</span>
+    </p>
+    <p>1등 총 상금: 28,502,308,510원</p>
+  </div>
+
+  <!-- 1164회 -->
+  <div class="lotto-card">
+    <h3>1164회</h3>
+    <p class="numbers">
+      <span class="c1">17</span>
+      <span class="c2">18</span>
+      <span class="c3">23</span>
+      <span class="c4">25</span>
+      <span class="c5">38</span>
+      <span class="c6">39</span>
+      <span class="c7">22</span>
+    </p>
+    <p>1등 총 상금: 28,510,198,132원</p>
+  </div>
+
+  <!-- 1163회 -->
+  <div class="lotto-card">
+    <h3>1163회</h3>
+    <p class="numbers">
+      <span class="c1">2</span>
+      <span class="c2">13</span>
+      <span class="c3">15</span>
+      <span class="c4">16</span>
+      <span class="c5">33</span>
+      <span class="c6">43</span>
+      <span class="c7">4</span>
+    </p>
+    <p>1등 총 상금: 29,053,367,250원</p>
+  </div>
+
+
+  </div>
+
+<!-- <p>=========================================================</p> -->
+
+<script>
+  function calculateRound() {
+    const baseRound = 1172;
+    const baseDate = new Date("2025-05-17T20:30:00");
+    const now = new Date();
+
+    const diffMs = now - baseDate;
+    const weekMs = 7 * 24 * 60 * 60 * 1000;
+    const fullWeeksPassed = Math.floor(diffMs / weekMs);
+
+    const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
+
+    const round = baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
+    return round;
+  }
+
+  const round = calculateRound();
+  document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
+</script>
+</body>
+</html>
