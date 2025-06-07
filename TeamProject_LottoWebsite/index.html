@@ -181,29 +181,25 @@
                 font-size: 0.9em;
             }
         }
-
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="intro-section">
-            <h2>🎉 Discover Your Luck!</h2>
+            <h2>🎉 당신의 행운을 찾아보세요!</h2>
             <p>
-                Welcome to our Lottery Recommendation Website.<br>
-                Predict your fortune with special lottery numbers and birthday fortune suggested by GPT.<br>
-                You can also check past winning lottery numbers.
-                This project was created by Team 2 of the OSS class
+                저희 로또 추천 웹사이트에 오신 것을 환영합니다.<br>
+                GPT가 추천하는 특별한 로또 번호와 생일 운세로 당신의 행운을 예측해보세요.<br>
+                역대 로또 당첨 번호도 확인하실 수 있습니다.
             </p>
-            <div class="intro-buttons">    
-                <a href="{% url 'lotto_predict' %}" class="main-nav-button">✨ Generate Lottery Numbers</a>
-                <a href="{% url 'fortune_check' %}" class="main-nav-button secondary">🎂 Today's Financial Fortune</a>
-                <a href="{% url 'lotto_history' %}" class="main-nav-button tertiary">📜 Lottery History</a>
-                <a href="{% url 'lotto_combiner' %}" class="main-nav-button quaternary">➕ Lottery Number Combiner</a>
+            <div class="intro-buttons">
+                <button class="main-nav-button" onclick="location.href='lotto_predict.html'">✨ 예상 번호 추출</button>
+                <button class="main-nav-button secondary" onclick="location.href='fortune_check.html'">🎂 오늘의 금전운</button>
+                <button class="main-nav-button tertiary" onclick="location.href='lotto_history.html'">📜 역대 당첨 번호</button>
+                <button class="main-nav-button quaternary" onclick="location.href='lotto_combiner.html'">➕ 번호 조합기</button>
             </div>
         </div>
     </div>
-
 </body>
-
 </html>
