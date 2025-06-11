@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의 금전운 - 로또 추천 website</title>
+    <style>
+        /* General Body & Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; /* 밝은 회색 텍스트로 대비 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+            background-attachment: fixed;
+            overflow-x: hidden; /* 가로 스크롤바 방지 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for better structure */
+        .container {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: rgba(34, 49, 63, 0.9); /* 어두운 반투명 배경 */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .navbar button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Today's Fortune Section */
+        .fortune-section {
+            background: rgba(44, 62, 80, 0.8);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .fortune-section h2 {
+            color: #f1c40f;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        .fortune-input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        input[type="date"] {
+            padding: 12px 18px;
+            font-size: 1.1em;
+            border: 1px solid #7f8c8d;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            flex-grow: 1;
+            max-width: 250px;
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        input[type="date"]:focus {
+            border-color: #f1c40f;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.3);
+        }
+
+        .fortune-input-group button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        }
+
+        .fortune-input-group button:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+
+        #fortune-result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            padding: 25px;
+            background-color: rgba(52, 73, 94, 0.8);
+            border-left: 6px solid #f1c40f;
+            border-radius: 10px;
+            text-align: left;
+            word-break: keep-all;
+            line-height: 1.8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            color: #ecf0f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .navbar button {
+                margin: 5px;
+                font-size: 0.9em;
+            }
+            .fortune-section {
+                padding: 30px 20px;
+                margin: 40px auto;
+            }
+            .fortune-section h2 {
+                font-size: 1.8em;
+            }
+            .fortune-input-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            input[type="date"] {
+                width: 90%;
+                max-width: none;
+            }
+            #fortune-result {
+                font-size: 1.1em;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .navbar button {
+                padding: 8px 15px;
+            }
+            .fortune-section h2 {
+                font-size: 1.5em;
+            }
+            input[type="date"] {
+                font-size: 0.9em;
+            }
+            .fortune-input-group button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            #fortune-result {
+                font-size: 1em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <button onclick="location.href='index.html'">🏠 홈으로</button>
+            <button onclick="location.href='lotto_predict.html'">✨ 예상 번호 추출</button>
+            <button onclick="location.href='lotto_history.html'">📜 역대 당첨 번호</button>
+            <button onclick="location.href='lotto_combiner.html'">➕ 번호 조합기</button>
+        </div>
+
+        <div id="fortune-section" class="fortune-section">
+            <h2>🎂 생일로 보는 오늘의 금전운</h2>
+            <div class="fortune-input-group">
+                <input type="date" id="birthdate" />
+                <button onclick="checkFortune()">운세 보기</button>
+            </div>
+            <div id="fortune-result"></div>
+        </div>
+    </div>
+
+    <script>
+        // 서버에서 채워줄 {{금전운}} 플레이스홀더를 사용합니다.
+        const PLACEHOLDER_FORTUNE = "{{금전운}}"; 
+
+        window.onload = function() {
+            const resultBox = document.getElementById("fortune-result");
+            // 페이지 로드 시 기본 메시지 표시
+            if (PLACEHOLDER_FORTUNE === "{{금전운}}") { // 플레이스홀더가 채워지지 않았다면
+                resultBox.innerText = "생일을 선택하고 운세를 확인하세요!";
+            } else { // 플레이스홀더가 채워졌다면 바로 표시
+                resultBox.innerText = PLACEHOLDER_FORTUNE;
+            }
+        };
+
+        function checkFortune() {
+            const birth = document.getElementById("birthdate").value;
+            const resultBox = document.getElementById("fortune-result");
+
+            if (!birth) {
+                resultBox.innerText = "생일을 선택해주세요!";
+                return;
+            }
+            // 생일이 선택되면 {{금전운}} 값을 표시합니다.
+            // 만약 생일에 따라 동적으로 운세를 받고 싶다면, 이 부분에서 서버 API를 호출해야 합니다.
+            if (PLACEHOLDER_FORTUNE === "{{금전운}}") {
+                 resultBox.innerText = "운세 정보를 불러올 수 없습니다. 서버 설정을 확인해주세요.";
+            } else {
+                 resultBox.innerText = PLACEHOLDER_FORTUNE;
+            }
+           
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 번호 조합기 - 나만의 로또 번호 만들기</title>
+    <style>
+        /* General Body & Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; /* 밝은 회색 텍스트로 대비 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+            background-attachment: fixed;
+            overflow-x: hidden; /* 가로 스크롤바 방지 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for better structure */
+        .container {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: rgba(34, 49, 63, 0.9); /* 어두운 반투명 배경 */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Navigation Bar - 추가된 스타일 */
+        .navbar {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .navbar a {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1em;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Header / Title */
+        h1 {
+            color: #f1c40f;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 1.1em;
+            color: #bdc3c7;
+            margin-bottom: 30px;
+        }
+
+        /* Number Selection Grid */
+        .number-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr); /* 1부터 45까지 5줄 (9개씩) */
+            gap: 8px;
+            width: 100%;
+            max-width: 600px; /* 그리드 최대 너비 제한 */
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(52, 73, 94, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .number-selection-grid .ball {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* 볼 크기 */
+            height: 45px;
+            border-radius: 50%;
+            background-color: #34495e; /* 기본 볼 색상 */
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 볼 호버 효과 */
+        .number-selection-grid .ball:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 선택된 볼 색상 */
+        .number-selection-grid .ball.selected {
+            border: 3px solid #f1c40f; /* 선택된 볼 테두리 */
+            transform: scale(1.05); /* 약간 커지게 */
+        }
+
+        /* Lotto Ball Colors (선택된 볼에 적용될 색상) */
+        .number-selection-grid .ball.selected.color-1-10, #combined-lotto-balls .ball.color-1-10 { background-color: #f39c12; }
+        .number-selection-grid .ball.selected.color-11-20, #combined-lotto-balls .ball.color-11-20 { background-color: #3498db; }
+        .number-selection-grid .ball.selected.color-21-30, #combined-lotto-balls .ball.color-21-30 { background-color: #e74c3c; }
+        .number-selection-grid .ball.selected.color-31-40, #combined-lotto-balls .ball.color-31-40 { background-color: #95a5a6; }
+        .number-selection-grid .ball.selected.color-41-45, #combined-lotto-balls .ball.color-41-45 { background-color: #27ae60; }
+
+
+        /* Combined Lotto Balls Display */
+        #combined-lotto-balls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 80px; /* 최소 높이 설정 */
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #combined-lotto-balls .ball {
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+            animation: bounceIn 0.6s ease-out; /* 등장 애니메이션 */
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Buttons */
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button-group button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #f1c40f; /* 주황색 계열 */
+            color: #2c3e50; /* 어두운 글씨색 */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .button-group button:hover {
+            background-color: #e6b200; /* 어둡게 */
+            transform: translateY(-2px);
+        }
+
+        .button-group button.reset-button {
+            background-color: #e74c3c; /* 빨간색 */
+            color: white;
+        }
+
+        .button-group button.reset-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .navbar button { margin: 5px; font-size: 0.9em; } /* 내비게이션 버튼 크기 조절 */
+            h1 { font-size: 2em; }
+            .description { font-size: 1em; }
+            .number-selection-grid { grid-template-columns: repeat(7, 1fr); max-width: 450px; } /* 태블릿에서 컬럼 수 조절 */
+            .number-selection-grid .ball { width: 40px; height: 40px; font-size: 1em; }
+            #combined-lotto-balls .ball { width: 45px; height: 45px; font-size: 1.5em; }
+            .button-group button { padding: 10px 20px; font-size: 1em; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .navbar button { padding: 8px 15px; } /* 내비게이션 버튼 크기 조절 */
+            h1 { font-size: 1.8em; }
+            .description { font-size: 0.9em; }
+            .number-selection-grid { grid-template-columns: repeat(6, 1fr); max-width: 320px; } /* 모바일에서 컬럼 수 조절 */
+            .number-selection-grid .ball { width: 35px; height: 35px; font-size: 0.9em; }
+            #combined-lotto-balls .ball { width: 40px; height: 40px; font-size: 1.3em; }
+            .button-group { flex-direction: column; } /* 모바일에서 버튼 세로 정렬 */
+            .button-group button { width: 80%; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+         <div class="navbar">
+        
+        <a href="{% url 'lotto_predict' %}">✨ Generate Lottery Numbers</a>
+
+        <a href="{% url 'fortune_check' %}" >🎂 Today's Financial Fortune</a>
+        <a href="{% url 'lotto_history' %}" >📜 Lottery History</a>
+        
+    </div>
+        <h1>My Own Lotto Number Combiner  ✨</h1>
+        <p class="description">
+            Select **up to 5** lucky numbers, and the rest will be filled automatically to create your personalized lotto combination!
+        </p>
+
+        <h3>1. Number Selection</h3>
+        <div class="number-selection-grid" id="number-selection-grid">
+            </div>
+
+        <div class="button-group">
+            <button onclick="generateCombinedLotto()">🎯 Combine Lotto Numbers</button>
+            <button class="reset-button" onclick="resetSelection()">🔄 Reset Selection</button>
+        </div>
+
+        <h3>2. Combined Lotto Numbers</h3>
+        <div id="combined-lotto-balls">
+            </div>
+    </div>
+
+    <script>
+        // 로또 볼 색상 클래스를 반환하는 함수
+        function getBallColorClass(num) {
+            if (num >= 1 && num <= 10) return 'color-1-10';
+            else if (num >= 11 && num <= 20) return 'color-11-20';
+            else if (num >= 21 && num <= 30) return 'color-21-30';
+            else if (num >= 31 && num <= 40) return 'color-31-40';
+            else if (num >= 41 && num <= 45) return 'color-41-45';
+            return '';
+        }
+
+        let selectedNumbers = new Set(); // 사용자가 선택한 번호를 저장하는 Set
+
+        // 1부터 45까지 숫자 볼 그리드 생성
+        function createNumberSelectionGrid() {
+            const grid = document.getElementById('number-selection-grid');
+            grid.innerHTML = ''; // 기존 내용 초기화
+
+            for (let i = 1; i <= 45; i++) {
+                const ball = document.createElement('div');
+                ball.className = `ball ${getBallColorClass(i)}`; // 색상 클래스 기본 적용
+                ball.textContent = i;
+                ball.dataset.number = i; // 번호 데이터를 저장 (나중에 사용)
+                
+                // 클릭 이벤트 리스너 추가: 볼을 클릭하면 선택/해제 토글
+                ball.addEventListener('click', () => toggleNumberSelection(ball, i));
+                grid.appendChild(ball);
+            }
+        }
+
+        // 숫자 볼 선택/선택 해제 기능
+        function toggleNumberSelection(ballElement, number) {
+            if (selectedNumbers.has(number)) {
+                // 이미 선택된 번호면 선택 해제
+                selectedNumbers.delete(number);
+                ballElement.classList.remove('selected');
+            } else {
+                // 선택되지 않은 번호면 선택
+                if (selectedNumbers.size < 5) { // 최대 5개까지만 선택 가능
+                    selectedNumbers.add(number);
+                    ballElement.classList.add('selected');
+                } else {
+                    alert('최대 5개의 번호만 선택할 수 있습니다.');
+                }
+            }
+            console.log('현재 선택된 번호:', Array.from(selectedNumbers));
+        }
+
+        // 로또 번호 조합 및 결과 표시
+        function generateCombinedLotto() {
+            const lottoContainer = document.getElementById('combined-lotto-balls');
+            lottoContainer.innerHTML = ''; // 기존 번호 초기화
+
+            let finalLottoNumbers = new Set(selectedNumbers); // 사용자가 선택한 번호로 시작
+
+            // 선택된 번호가 6개 미만이면 랜덤 번호 추가 (중복 방지)
+            while (finalLottoNumbers.size < 6) {
+                const randomNumber = Math.floor(Math.random() * 45) + 1;
+                finalLottoNumbers.add(randomNumber); // Set은 중복을 자동으로 걸러줌
+            }
+
+            // Set을 배열로 변환하고 오름차순 정렬
+            const sortedLottoNumbers = Array.from(finalLottoNumbers).sort((a, b) => a - b);
+
+            // 결과가 없을 경우 (선택된 번호도 없고, 랜덤도 못 뽑은 경우 - 발생하기 어려움)
+            if (sortedLottoNumbers.length === 0) {
+                lottoContainer.innerHTML = '<p style="color: #bdc3c7; font-size: 1.1em;">번호를 선택하거나, "로또 번호 조합하기" 버튼을 눌러보세요!</p>';
+                return;
+            }
+
+            // 조합된 번호들을 화면에 표시
+            sortedLottoNumbers.forEach(num => {
+                const ball = document.createElement('div');
+                ball.className = `ball ${getBallColorClass(num)}`;
+                ball.textContent = num;
+                lottoContainer.appendChild(ball);
+            });
+        }
+
+        // 선택 초기화 기능
+        function resetSelection() {
+            selectedNumbers.clear(); // 선택된 번호 모두 제거
+            const selectedBalls = document.querySelectorAll('.number-selection-grid .ball.selected');
+            selectedBalls.forEach(ball => {
+                ball.classList.remove('selected'); // 'selected' 클래스 제거
+            });
+            document.getElementById('combined-lotto-balls').innerHTML = 
+                '<p style="color: #bdc3c7; font-size: 1.1em;">원하는 번호를 선택하거나, 바로 "로또 번호 조합하기" 버튼을 눌러 보세요!</p>'; // 결과창 초기화
+            console.log('선택 초기화됨');
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = function() {
+            createNumberSelectionGrid(); // 1부터 45까지 숫자 선택 그리드 생성
+            // 초기 로딩 시 조합된 번호 대신 안내 문구 표시
+            document.getElementById('combined-lotto-balls').innerHTML = 
+                '<p style="color: #bdc3c7; font-size: 1.1em;">원하는 번호를 선택하거나, 바로 "로또 번호 조합하기" 버튼을 눌러 보세요!</p>';
+        };
+    </script>
+</body>
+</html>

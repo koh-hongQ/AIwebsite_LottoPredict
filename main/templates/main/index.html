@@ -126,41 +126,64 @@
         color: #222;
         margin-bottom: 30px;
         text-align: center;
+      
+
+      /* 로그인 화면 스타일 */
+      .welcome-text {
+        font-size: 1.2rem;
+        color: #eee727;
       }
 
-      .header-row {
+      .logout-btn {
+        padding: 0.5rem 1rem;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .logout-btn:hover {
+        background-color: #c0392b;
+      }
+      .login-container {
         display: flex;
-        align-items: center;
-        gap: 20px;
         justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
       }
 
-      .header-row img {
-        width: 40px;
-        height: 40px;
+      .login-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
       }
 
-      .header-row h2 {
-        font-size: 20px;
-        margin: 0;
+      .login-box h2 {
         color: #333;
+        margin-bottom: 2rem;
       }
 
-      .lotto-container {
-        display: flex;
-        gap: 15px;
-        margin-left: 20px;
+      .login-box input {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        box-sizing: border-box;
       }
 
-      .ball {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
+      .login-box button {
+        width: 100%;
+        padding: 1rem;
+        background-color: #667eea;
         color: white;
         box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
       }
@@ -331,6 +354,202 @@
       .hidden {
         display: none;
       }
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .login-box button:hover {
+        background-color: #5a6fd8;
+      }
+
+      .login-info {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 1rem;
+        line-height: 1.4;
+      }
+
+        /* General Body & Background Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; /* 밝은 회색 텍스트로 대비 */
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); /* 행운의 별밤 느낌의 어두운 그라데이션 */
+            background-attachment: fixed;
+            overflow-x: hidden; /* 가로 스크롤바 방지 */
+            scroll-behavior: smooth; /* 부드러운 스크롤 이동 */
+            justify-content: center; /* 수직 중앙 정렬 */
+            align-items: center; /* 수평 중앙 정렬 */
+        }
+
+        /* Container for better structure */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: rgba(34, 49, 63, 0.9); /* 어두운 반투명 배경 */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+            box-sizing: border-box;
+            display: flex; /* flexbox 사용 */
+            flex-direction: column; /* 세로 정렬 */
+            align-items: center; /* 수평 중앙 정렬 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+
+        /* Introduction Section (New) */
+        .intro-section {
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 50px;
+            background-color: rgba(44, 62, 80, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%; /* 너비 100%로 설정 */
+            box-sizing: border-box; /* 패딩, 보더 포함 너비 계산 */
+        }
+
+        .intro-section h2 {
+            color: #f1c40f;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.1em;
+            color: #bdc3c7;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap; /* 이제 항상 줄바꿈이 가능하도록 'wrap'으로 설정 */
+            /* overflow-x: auto; 제거 */ /* 가로 스크롤바 방지 */
+            /* padding-bottom: 10px; 제거 (스크롤바 없으므로 필요 없음) */
+        }
+
+        .intro-buttons .main-nav-button {
+            padding: 18px 35px;
+            font-size: 1.2em;
+            background-color: #f1c40f; /* 골드 */
+            color: #2c3e50;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(241, 196, 15, 0.4);
+            font-weight: bold;
+            flex-shrink: 0; /* 버튼이 줄어들지 않도록 설정 */
+        }
+
+        .intro-buttons .main-nav-button:hover {
+            background-color: #e6b10e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(241, 196, 15, 0.6);
+        }
+        .intro-buttons .main-nav-button.secondary { /* 보조 버튼 색상 */
+            background-color: #3498db; /* 블루 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+        .intro-buttons .main-nav-button.secondary:hover {
+            background-color: #2980b9;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+        }
+        .intro-buttons .main-nav-button.tertiary { /* 보조 버튼 색상 */
+            background-color: #e67e22; /* 오렌지 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+        }
+        .intro-buttons .main-nav-button.tertiary:hover {
+            background-color: #d35400;
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6);
+        }
+        /* 새로운 버튼 스타일 추가 */
+        .intro-buttons .main-nav-button.quaternary {
+            background-color: #9b59b6; /* 보라색 계열 */
+            color: white;
+            box-shadow: 0 6px 15px rgba(155, 89, 182, 0.4);
+        }
+        .intro-buttons .main-nav-button.quaternary:hover {
+            background-color: #8e44ad;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                margin: 15px auto;
+                padding: 25px;
+            }
+            .intro-buttons .main-nav-button {
+                padding: 12px 30px;
+                font-size: 1.1em;
+            }
+            .intro-section h2 {
+                font-size: 2em;
+            }
+        }
+
+        /* 768px 미만에서 버튼 정렬을 더 유연하게 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 10px auto;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .intro-section {
+                padding: 40px 15px;
+            }
+            .intro-section h2 {
+                font-size: 1.8em;
+            }
+            .intro-section p {
+                font-size: 1em;
+            }
+            .intro-buttons {
+                flex-direction: column; /* 작은 화면에서 버튼들을 세로로 정렬 */
+                gap: 15px; /* 세로 간격 유지 */
+            }
+            .intro-buttons .main-nav-button {
+                padding: 10px 25px;
+                font-size: 1em;
+                width: 100%; /* 버튼이 전체 너비를 차지하도록 설정 */
+                box-sizing: border-box; /* 패딩 포함 너비 계산 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .intro-section h2 {
+                font-size: 1.5em;
+            }
+            .intro-buttons .main-nav-button {
+                padding: 8px 20px;
+                font-size: 0.9em;
+            }
+        }
+
     </style>
 </head>
 
@@ -383,185 +602,44 @@
         <p style="text-align: center; color: #666;">There is no generated number yet.</p>
       </div>
     </div>
-
-    <!-- 운세 섹션 -->
-    <div class="fortune-section">
-      <h2>🎂 생일로 보는 오늘의 금전운</h2>
-      <input type="date" id="birthdate" />
-      <button onclick="checkFortune()">운세 보기</button>
-      <div id="fortune-result"></div>
-    </div>
-
-    <!-- 과거 당첨번호 -->
-    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: 2rem 0;">
-      <h2 style="text-align: center; color: #333;">🏆 과거 당첨번호</h2>
-      <div class="scroll-box">
-        <!-- 1173회 -->
-        <div class="lotto-card">
-          <h3>1173회</h3>
-          <p class="numbers">
-            <span class="c1">1</span>
-            <span class="c2">5</span>
-            <span class="c3">18</span>
-            <span class="c4">20</span>
-            <span class="c5">30</span>
-            <span class="c6">35</span>
-            <span class="c7">3</span>
-          </p>
-          <p>1등 총 상금: 28,318,705,512원</p>
-        </div>
-
-        <!-- 1172회 -->
-        <div class="lotto-card">
-          <h3>1172회</h3>
-          <p class="numbers">
-            <span class="c1">7</span>
-            <span class="c2">9</span>
-            <span class="c3">24</span>
-            <span class="c4">40</span>
-            <span class="c5">42</span>
-            <span class="c6">44</span>
-            <span class="c7">45</span>
-          </p>
-          <p>1등 총 상금: 28,639,057,876원</p>
-        </div>
-
-        <!-- 1171회 -->
-        <div class="lotto-card">
-          <h3>1171회</h3>
-          <p class="numbers">
-            <span class="c1">3</span>
-            <span class="c2">6</span>
-            <span class="c3">7</span>
-            <span class="c4">11</span>
-            <span class="c5">12</span>
-            <span class="c6">17</span>
-            <span class="c7">19</span>
-          </p>
-          <p>1등 총 상금: 23,695,251,006원</p>
-        </div>
-
-        <!-- 1170회 -->
-        <div class="lotto-card">
-          <h3>1170회</h3>
-          <p class="numbers">
-            <span class="c1">3</span>
-            <span class="c2">13</span>
-            <span class="c3">28</span>
-            <span class="c4">34</span>
-            <span class="c5">38</span>
-            <span class="c6">42</span>
-            <span class="c7">25</span>
-          </p>
-          <p>1등 총 상금: 27,731,019,380원</p>
-        </div>
-
-        <!-- 1169회 -->
-        <div class="lotto-card">
-          <h3>1169회</h3>
-          <p class="numbers">
-            <span class="c1">5</span>
-            <span class="c2">12</span>
-            <span class="c3">24</span>
-            <span class="c4">26</span>
-            <span class="c5">39</span>
-            <span class="c6">42</span>
-            <span class="c7">20</span>
-          </p>
-          <p>1등 총 상금: 28,527,358,130원</p>
-        </div>
-
-        <!-- 1168회 -->
-        <div class="lotto-card">
-          <h3>1168회</h3>
-          <p class="numbers">
-            <span class="c1">9</span>
-            <span class="c2">21</span>
-            <span class="c3">24</span>
-            <span class="c4">30</span>
-            <span class="c5">33</span>
-            <span class="c6">37</span>
-            <span class="c7">29</span>
-          </p>
-          <p>1등 총 상금: 27,776,266,882원</p>
-        </div>
-
-        <!-- 1167회 -->
-        <div class="lotto-card">
-          <h3>1167회</h3>
-          <p class="numbers">
-            <span class="c1">8</span>
-            <span class="c2">23</span>
-            <span class="c3">31</span>
-            <span class="c4">35</span>
-            <span class="c5">39</span>
-            <span class="c6">40</span>
-            <span class="c7">24</span>
-          </p>
-          <p>1등 총 상금: 28,840,879,130원</p>
-        </div>
-
-        <div class="lotto-card">
-          <h3>1166회</h3>
-          <p class="numbers">
-            <span class="c1">14</span>
-            <span class="c2">23</span>
-            <span class="c3">25</span>
-            <span class="c4">27</span>
-            <span class="c5">29</span>
-            <span class="c6">42</span>
-            <span class="c7">16</span>
-          </p>
-          <p>1등 총 상금: 29,012,479,132원</p>
-        </div>
-
-        <div class="lotto-card">
-          <h3>1165회</h3>
-          <p class="numbers">
-            <span class="c1">6</span>
-            <span class="c2">7</span>
-            <span class="c3">27</span>
-            <span class="c4">29</span>
-            <span class="c5">38</span>
-            <span class="c6">45</span>
-            <span class="c7">17</span>
-          </p>
-          <p>1등 총 상금: 28,502,308,510원</p>
-        </div>
-
-        <div class="lotto-card">
-          <h3>1164회</h3>
-          <p class="numbers">
-            <span class="c1">17</span>
-            <span class="c2">18</span>
-            <span class="c3">23</span>
-            <span class="c4">25</span>
-            <span class="c5">38</span>
-            <span class="c6">39</span>
-            <span class="c7">22</span>
-          </p>
-          <p>1등 총 상금: 28,510,198,132원</p>
-        </div>
-
-        <div class="lotto-card">
-          <h3>1163회</h3>
-          <p class="numbers">
-            <span class="c1">2</span>
-            <span class="c2">13</span>
-            <span class="c3">15</span>
-            <span class="c4">16</span>
-            <span class="c5">33</span>
-            <span class="c6">43</span>
-            <span class="c7">4</span>
-          </p>
-          <p>1등 총 상금: 29,053,367,250원</p>
-        </div>
+  <!-- 로그인 화면 -->
+  <div id="login-screen" class="login-container">
+    <div class="login-box">
+      <h2>AI Lotto Predict Website</h2>
+      <input type="text" id="username" placeholder="Enter your ID" required>
+      <button onclick="login()">Login</button>
+      <div class="login-info">
+        Enter your ID<br>
+        Individual history is managed for each user.
       </div>
     </div>
   </div>
 
-  <script>
-    // 로그인 관련 함수들
+  <!-- 메인 화면 -->
+  <div id="main-screen" class="main-content">
+    <div class="header">
+      <h1 id="welcome" class="welcome-text">Welcome!</h1>
+      <button class="logout-btn" onclick="logout()" style="float: right;">Logout</button>
+    </div>
+    <div class="container">
+        <div class="intro-section">
+            <h2>🎉 Discover Your Luck!</h2>
+            <p>
+                Welcome to our Lottery Recommendation Website.<br>
+                Predict your fortune with special lottery numbers and birthday fortune suggested by GPT.<br>
+                You can also check past winning lottery numbers.
+                This project was created by Team 2 of the OSS class
+            </p>
+            <div class="intro-buttons">    
+                <a href="{% url 'lotto_predict' %}" class="main-nav-button">✨ Generate Lottery Numbers</a>
+                <a href="{% url 'fortune_check' %}" class="main-nav-button secondary">🎂 Today's Financial Fortune</a>
+                <a href="{% url 'lotto_history' %}" class="main-nav-button tertiary">📜 Lottery History</a>
+                <a href="{% url 'lotto_combiner' %}" class="main-nav-button quaternary">➕ Lottery Number Combiner</a>
+            </div>
+        </div>
+    </div>
+<script>
+      // 로그인 관련 함수들
     function login() {
       const username = document.getElementById('username').value.trim();
 
@@ -597,188 +675,7 @@
       }
     }
 
-    // 로또 관련 함수들
-    function calculateRound() {
-      const baseRound = 1172;
-      const baseDate = new Date("2025-05-17T20:30:00");
-      const now = new Date();
-
-      const diffMs = now - baseDate;
-      const weekMs = 7 * 24 * 60 * 60 * 1000;
-      const fullWeeksPassed = Math.floor(diffMs / weekMs);
-
-      const nextDrawTime = new Date(baseDate.getTime() + fullWeeksPassed * weekMs + 30 * 60 * 1000);
-
-      return baseRound + (now >= nextDrawTime ? fullWeeksPassed + 1 : fullWeeksPassed);
-    }
-
-    function generateLottoNumbers() {
-      const numbers = [];
-      while (numbers.length < 6) {
-        const num = Math.floor(Math.random() * 45) + 1;
-        if (!numbers.includes(num)) {
-          numbers.push(num);
-        }
-      }
-      return numbers.sort((a, b) => a - b);
-    }
-
-    function getBallColor(num) {
-      if (num <= 10) return 'yellow';
-      else if (num <= 20) return 'blue';
-      else if (num <= 30) return 'red';
-      else if (num <= 40) return 'gray';
-      else return 'green';
-    }
-
-    function displayLottoNumbers(numbers) {
-      const balls = document.querySelectorAll('.lotto-container .ball');
-      
-      for (let i = 0; i < balls.length && i < numbers.length; i++) {
-        balls[i].textContent = numbers[i];
-        balls[i].className = 'ball ' + getBallColor(numbers[i]);
-      }
-    }
-
-    function generateNewNumbers() {
-      const numbers = generateLottoNumbers();
-      displayLottoNumbers(numbers);
-      addToHistory(numbers);
-    }
-
-    function addToHistory(numbers) {
-      const history = getHistory();
-      const now = new Date();
-      const timeString = now.toLocaleString('ko-KR');
-      
-      history.unshift({
-        numbers: numbers,
-        timestamp: timeString,
-        round: calculateRound()
-      });
-
-      // 최대 10개까지만 저장
-      if (history.length > 10) {
-        history.splice(10);
-      }
-
-      saveHistory(history);
-      displayHistory();
-    }
-
-    function getHistory() {
-      const currentUser = sessionStorage.getItem('loggedInUser');
-      if (!currentUser) return [];
-      
-      const historyKey = `lottoHistory_${currentUser}`;
-      const historyData = sessionStorage.getItem(historyKey);
-      return historyData ? JSON.parse(historyData) : [];
-    }
-
-    function saveHistory(history) {
-      const currentUser = sessionStorage.getItem('loggedInUser');
-      if (!currentUser) return;
-      
-      const historyKey = `lottoHistory_${currentUser}`;
-      sessionStorage.setItem(historyKey, JSON.stringify(history));
-    }
-
-    function displayHistory() {
-      const history = getHistory();
-      const container = document.getElementById('history-container');
-
-      if (history.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #666;">아직 생성된 번호가 없습니다.</p>';
-        return;
-      }
-
-      let html = '';
-      history.forEach((item, index) => {
-        html += `
-          <div class="history-item">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <strong>추천 번호 #${index + 1}</strong>
-              <small style="color: #666;">${item.timestamp}</small>
-            </div>
-            <div class="history-numbers">
-              ${item.numbers.map(num => 
-                `<div class="history-ball ${getBallColor(num)}">${num}</div>`
-              ).join('')}
-            </div>
-            <small style="color: #888;">예상 회차: ${item.round}회</small>
-          </div>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    function clearHistory() {
-      if (confirm('Are you sure you want to delete all the history?')) {
-        const currentUser = sessionStorage.getItem('loggedInUser');
-        if (currentUser) {
-          const historyKey = `lottoHistory_${currentUser}`;
-          sessionStorage.removeItem(historyKey);
-          displayHistory();
-        }
-      }
-    }
-
-    // 운세 관련 함수
-    function checkFortune() {
-      const birth = document.getElementById("birthdate").value;
-      const resultBox = document.getElementById("fortune-result");
-
-      if (!birth) {
-        resultBox.innerText = "생일을 선택해주세요!";
-        return;
-      }
-
-      const birthDate = new Date(birth);
-      const today = new Date();
-      const luckyNumber = (birthDate.getDate() + today.getDate()) % 10;
-      
-      const fortunes = [
-        "오늘은 큰 행운이 찾아올 날입니다! 로또 구매를 추천해요! 🍀",
-        "금전운이 상승하고 있어요. 투자에 좋은 기회가 올 수 있습니다. 💰",
-        "평범한 하루지만 작은 행운이 숨어있을 거예요. 😊",
-        "조심스럽게 행동하세요. 큰 지출은 피하는 것이 좋겠어요. 🤔",
-        "친구나 가족과의 모임에서 좋은 소식이 있을 수 있어요! 🎉",
-        "새로운 기회를 발견할 수 있는 날입니다. 눈과 귀를 열어두세요! 👀",
-        "금전적으로 안정된 하루가 될 것 같아요. 💎",
-        "예상치 못한 수입이 생길 수 있는 날이에요! 🎁",
-        "로또보다는 저축에 집중하는 것이 좋겠어요. 🏦",
-        "대박은 아니지만 소소한 행운이 함께할 거예요! ✨"
-      ];
-
-      resultBox.innerText = fortunes[luckyNumber];
-    }
-
-    function initializeMain() {
-      const round = calculateRound();
-      document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
-      
-      // 초기 로또 번호 표시
-      const initialNumbers = generateLottoNumbers();
-      displayLottoNumbers(initialNumbers);
-      
-      displayHistory();
-    }
-
-    window.onload = function() {
-      const user = sessionStorage.getItem('loggedInUser');
-      if (user) {
-        showMainScreen();
-      } else {
-        document.getElementById('login-screen').style.display = 'flex';
-        document.getElementById('main-screen').style.display = 'none';
-      }
-    };
-    document.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
-        login();
-      }
-    });
-  </script>
+</script>
 </body>
+
 </html>
