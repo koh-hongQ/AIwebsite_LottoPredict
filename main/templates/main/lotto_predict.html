@@ -478,7 +478,8 @@
                 historyList.innerHTML = '<div class="no-history">아직 생성된 번호가 없습니다.</div>';
             } else {
                 historyList.innerHTML = history.map((entry, index) => {
-                    const numbers = entry.numbers.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+                    const numbers = entry.numbers; // 이미 배열
+
                     if (numbers.length !== 6) return '';
                     
                     numbers.sort((a, b) => a - b);
