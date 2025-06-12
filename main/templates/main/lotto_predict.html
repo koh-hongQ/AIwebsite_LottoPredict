@@ -424,12 +424,12 @@
                 lottoContainer.appendChild(ball);
             });
 
-            addHistory(rawLottoData); //번호 생성 시 히스토리에 추가
+            return numbers;
         }
 
         // 히스토리에 새로운 번호 조합을 추가하는 함수
-        function addHistory(numbersString) {
-            if (!numbersString || numbersString === "{{로또번호}}") return;
+        function addHistory(numbers) {
+            if (!numbers || !Array.isArray(numbers)|| numbers.length !== 6) return;
             
             // 세션 스토리지에서 기존 히스토리 가져오기
             const history = JSON.parse(sessionStorage.getItem('lottoHistory') || '[]');
@@ -445,14 +445,14 @@
             
             // 새로운 히스토리 항목 생성
             const newEntry = {
-                numbers: numbersString,
+                numbers: numbers.slice(),
                 date: dateString,
                 timestamp: now.getTime()
             };
             
             // 중복 체크 (같은 번호 조합이 최근 1분 내에 추가되었는지)
             const isDuplicate = history.some(entry => 
-                entry.numbers === numbersString && 
+                JSON.stringify(entry.numbers.sort()) == JSON.stringify(numbers.sort()) && 
                 (now.getTime() - entry.timestamp) < 60000 // 1분
             );
             
@@ -508,8 +508,12 @@
         window.onload = function () {
             const round = calculateRound();
             document.getElementById("round-title").textContent = `${round}회차의 예상 로또 번호`;
-            insertLottoNumbers(); // 페이지 로드 시 바로 번호 표시
-            updateHistoryList();
+
+            const numbers = insertLottoNumbers();
+            if (numbers){
+                addHistory(numbers);
+            }
+            updateHistoryDisplay();
         };
 
         function generateNewLotto() {
